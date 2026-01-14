@@ -25,7 +25,6 @@ func InitDB() *gorm.DB {
     dbname := os.Getenv("DB_NAME")
 
     // 3. Buat Koneksi Database (METODE CONCATENATION / GABUNGAN)
-    // Kita menggunakan tanda + untuk menyambung. Ini mencegah error %!(EXTRA) 
     dsn := "host=" + host + 
            " port=" + port + 
            " user=" + user + 
@@ -33,7 +32,7 @@ func InitDB() *gorm.DB {
            " dbname=" + dbname + 
            " sslmode=disable TimeZone=Asia/Jakarta"
 
-    // Debug: Cetak di terminal supaya Anda tahu isinya
+    // Debug: Cetak di terminal supaya tahu isinya
     log.Println("Mencoba koneksi ke DB...")
     log.Println("DSN:", dsn)
 

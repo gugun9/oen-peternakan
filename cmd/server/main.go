@@ -1,9 +1,9 @@
 package main
 
 import (
-    "oen-peternakan/internal/config"        // <--- DIUBAH DARI farm-project
-    "oen-peternakan/internal/controller"   // <--- DIUBAH DARI farm-project
-    "oen-peternakan/internal/middleware"    // <--- DIUBAH DARI farm-project
+    "oen-peternakan/internal/config"        
+    "oen-peternakan/internal/controller"   
+    "oen-peternakan/internal/middleware"    
     "log"
     "github.com/gofiber/fiber/v2"
     "github.com/gofiber/fiber/v2/middleware/cors"

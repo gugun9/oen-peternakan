@@ -9,7 +9,7 @@ import (
 func LoadEnv() {
 	err := godotenv.Load()
 	if err != nil {
-		log.Fatal("❌ Gagal load file .env")
+		log.Fatal("Gagal load file .env")
 	}
 }
 

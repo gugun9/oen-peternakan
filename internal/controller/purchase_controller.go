@@ -21,7 +21,6 @@ func CreatePurchase(c *fiber.Ctx) error {
     }
 
     // LOGIKA UPDATE STOK (ANTI-CURANG)
-    // Kita gunakan Transaction untuk memastikan kedua proses berhasil atau gagal bersamaan
     err := config.DB.Transaction(func(tx *gorm.DB) error {
         // 1. Simpan Data Pembelian
         if err := tx.Create(&purchase).Error; err != nil {
@@ -29,8 +28,6 @@ func CreatePurchase(c *fiber.Ctx) error {
         }
 
         // 2. Update Stok Vaksin
-        // Menggunakan gorm.Expr untuk melakukan perhitungan di level DB (stock + quantity)
-        // Ini mencegah race condition (kesalahan pengurangan/penjumlahan saat data dikirim bersamaan)
         if err := tx.Model(&models.Vaccine{}).
             Where("id = ?", purchase.VaccineID).
             Update("stock", gorm.Expr("stock + ?", purchase.Quantity)).Error; err != nil {
@@ -51,7 +48,6 @@ func DeletePurchase(c *fiber.Ctx) error {
     id := c.Params("id")
     
     // Opsional: Saat hapus pembelian, kurangi stok kembali?
-    // Untuk contoh ini, kita hanya hapus record pembeliannya saja.
     config.DB.Delete(&models.Purchase{}, id)
     return c.JSON(fiber.Map{"message": "Berhasil menghapus data pembelian"})
 }

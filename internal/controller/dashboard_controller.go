@@ -1,8 +1,8 @@
 package controllers
 
 import (
-    "oen-peternakan/internal/config" // Sudah diperbaiki: oen-farm
-    "oen-peternakan/internal/models" // Sudah diperbaiki: oen-farm
+    "oen-peternakan/internal/config" 
+    "oen-peternakan/internal/models" 
     "fmt"
     "github.com/gofiber/fiber/v2"
 )

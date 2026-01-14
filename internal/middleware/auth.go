@@ -33,8 +33,6 @@ func AuthRequired(c *fiber.Ctx) error {
             return nil, fmt.Errorf("Metode signing token salah: %v", token.Header["alg"])
         }
 
-        // Ambil Secret Key dari environment variable (.env)
-        // Jika belum ada di .env, gunakan string default sementara
         secret := os.Getenv("JWT_SECRET")
         if secret == "" {
             secret = "rahasia_farm_project_123" // GANTI INI DI PRODUCTION!
