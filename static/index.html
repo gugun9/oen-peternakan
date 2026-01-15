@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oen Peternakan</title>
-
+    <title>Sistem Manajemen Oen Peternakan</title>
+    
+    <!-- FAVICON (LOGO OEN) -->
     <link rel="icon" href="https://z-cdn-media.chatglm.cn/files/f4c2cd09-72ee-4cf6-8f3f-0bc31905489e.jpg?auth_key=1868372445-6eaff1c3dfbd422d92c7ee94ba9ee565-0-2a8864f482d6df289e57f87270e2f28c" type="image/jpeg">
+    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- CSS INTERNAL-->
     <style>
         :root {
             --primary-color: #2e7d32; 
@@ -42,15 +46,15 @@
 
         /* Admin Layout */
         #admin-app {
-            display: none; /* Hidden by default until login */
+            display: none; 
             display: flex;
             min-height: 100vh;
         }
 
-        /* Sidebar (Navbar Atas ke Bawah) */
+        /* Sidebar*/
         .sidebar {
             width: 250px;
-            background-color: #2e7d32;
+            background-color: #1b5e20;
             color: white;
             display: flex;
             flex-direction: column;
@@ -140,6 +144,15 @@
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+
+        /* Print Style */
+        @media print {
+            .sidebar, .btn, .no-print { display: none !important; }
+            .main-content { margin: 0; width: 100%; padding: 10px; }
+            .card { box-shadow: none; border: 1px solid #ddd; }
+            /* Memaksa background warna tercetak */
+            * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+        }
     </style>
 </head>
 <body>
@@ -159,9 +172,10 @@
     <section id="auth-section" class="auth-container">
         <div class="card card-auth p-4">
             <div class="text-center mb-4">
+                <!-- LOGO OEN (LOGIN & REGISTER) -->
                 <img src="https://z-cdn-media.chatglm.cn/files/f4c2cd09-72ee-4cf6-8f3f-0bc31905489e.jpg?auth_key=1868372445-6eaff1c3dfbd422d92c7ee94ba9ee565-0-2a8864f482d6df289e57f87270e2f28c" alt="Logo OEN" width="100" class="mb-2 rounded">
-                <h3>Admin</h3>
-                <p class="text-muted">Oen Peternakan</p>
+                <h3>Oen Admin</h3>
+                <p class="text-muted">Manajemen Oen Peternakan</p>
             </div>
             
             <!-- Login Form -->
@@ -189,7 +203,7 @@
 
             <!-- Register Form -->
             <form id="registerForm" style="display: none;">
-                <h4 class="mb-3">Daftar Peternak</h4>
+                <h4 class="mb-3">Peternak & Pemilik</h4>
                 <div class="mb-3">
                     <label class="form-label">Nama Lengkap</label>
                     <input type="text" class="form-control" id="regName" required>
@@ -214,8 +228,9 @@
     <div id="admin-app" style="display: none;">
         
         <!-- Sidebar Navigation -->
-        <nav class="sidebar">
+        <nav class="sidebar no-print">
             <div class="sidebar-header">
+                <!-- LOGO OEN (DASHBOARD) -->
                 <img src="https://z-cdn-media.chatglm.cn/files/f4c2cd09-72ee-4cf6-8f3f-0bc31905489e.jpg?auth_key=1868372445-6eaff1c3dfbd422d92c7ee94ba9ee565-0-2a8864f482d6df289e57f87270e2f28c" alt="Logo OEN" width="60" style="margin-bottom: 5px; border-radius: 5px;">
                 <h4>Oen Peternakan</h4>
                 <small id="userDisplay">Admin</small>
@@ -236,7 +251,7 @@
                 <i class="fas fa-calendar-alt"></i> <span>Jadwal Vaksin</span>
             </a>
             <a href="#" class="nav-link" onclick="showSection('laporan')">
-                <i class="fas fa-file-pdf"></i> <span>Laporan & Export</span>
+                <i class="fas fa-file-pdf"></i> <span>Laporan Lengkap</span>
             </a>
             <div class="mt-auto">
                 <a href="#" onclick="logout()" class="bg-danger">
@@ -289,7 +304,7 @@
             <!-- 2. VAKSIN SECTION -->
             <div id="vaksin" class="section-view">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2>Manajemen Vaksin</h2>
+                    <h2>Stok Vaksin</h2>
                     <button class="btn btn-success" onclick="openModal('modalVaksin')"><i class="fas fa-plus"></i> Tambah Data</button>
                 </div>
                 <div class="card shadow-sm">
@@ -385,60 +400,110 @@
                 </div>
             </div>
 
-            <!-- 6. LAPORAN SECTION (SPLIT 2 TABEL) -->
+            <!-- 6. LAPORAN SECTION (REVISI: 4 TABEL) -->
             <div id="laporan" class="section-view">
-                <h2 class="mb-4">Laporan & Export Data</h2>
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="mb-0">Laporan Lengkap</h2>
+                    <div class="btn-group no-print">
+                        <button class="btn btn-success" onclick="exportAllData()"><i class="fas fa-file-excel"></i> Export Excel</button>
+                        <button class="btn btn-danger" onclick="window.print()"><i class="fas fa-print"></i> Print PDF</button>
+                    </div>
+                </div>
                 
-                <!-- TABEL 1: REKAPITULASI -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-success text-white">
-                        <h5 class="mb-0">1. Rekapitulasi Stok & Operasional</h5>
+                <!-- Wrapper untuk Area Laporan (Penting untuk Print/PDF) -->
+                <div id="reportArea">
+                    
+                    <div class="text-center mb-4">
+                        <h3>LAPORAN KEGIATAN & STOK PETERNAKAN OEN</h3>
+                        <p class="text-muted">Dicetak pada: <span id="currentDate"></span></p>
                     </div>
-                    <div class="card-body">
-                        <p class="text-muted">Ringkasan jumlah data vaksin, supplier, dan jadwal aktif.</p>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="reportTableRecap">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>Kategori</th>
-                                        <th>Total Data</th>
-                                        <th>Detail</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="reportRecapBody"></tbody>
-                            </table>
+
+                    <!-- TABEL 1: STOK VAKSIN -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">1. Data Stok Vaksin</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-0" id="reportTableVaksin">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Vaksin</th>
+                                            <th>Stok Saat Ini</th>
+                                            <th>Supplier</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reportVaksinBody"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- TABEL 2: PEMBELIAN -->
-                <div class="card shadow-sm mb-4">
-                    <div class="card-header bg-primary text-white">
-                        <h5 class="mb-0">2. Riwayat Pembelian Vaksin</h5>
-                    </div>
-                    <div class="card-body">
-                        <p class="text-muted">Riwayat transaksi masuk barang (Pembelian).</p>
-                        <div class="table-responsive">
-                            <table class="table table-bordered table-striped" id="reportTablePurchases">
-                                <thead class="table-dark">
-                                    <tr>
-                                        <th>No. Faktur</th>
-                                        <th>Tanggal</th>
-                                        <th>Nama Vaksin</th>
-                                        <th>Jumlah Beli</th>
-                                        <th>Total Harga</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="reportPurchasesBody"></tbody>
-                            </table>
+                    <!-- TABEL 2: SUPPLIER -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-secondary text-white">
+                            <h5 class="mb-0">2. Data Supplier</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-0" id="reportTableSupplier">
+                                    <thead>
+                                        <tr>
+                                            <th>Nama Perusahaan</th>
+                                            <th>No Kontak</th>
+                                            <th>Alamat</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reportSupplierBody"></tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                <!-- Tombol Export -->
-                <div class="text-center">
-                    <button class="btn btn-success btn-lg" onclick="exportAllData()"><i class="fas fa-file-excel"></i> Export Excel (Gabungan)</button>
-                    <button class="btn btn-danger btn-lg" onclick="window.print()"><i class="fas fa-print"></i> Print PDF (Semua Tabel)</button>
+                    <!-- TABEL 3: PEMBELIAN VAKSIN -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">3. Riwayat Pembelian Vaksin</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-0" id="reportTablePembelian">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Vaksin</th>
+                                            <th>Jumlah Beli</th>
+                                            <th>Total Harga</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reportPurchasesBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TABEL 4: JADWAL VAKSINASI -->
+                    <div class="card shadow-sm mb-4">
+                        <div class="card-header bg-warning text-dark">
+                            <h5 class="mb-0">4. Jadwal Vaksinasi</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped mb-0" id="reportTableJadwal">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Ternak</th>
+                                            <th>Vaksin</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="reportJadwalBody"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -578,13 +643,15 @@
         </div>
     </div>
 
-    <!-- External Scripts -->
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- SheetJS for Excel -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
+    <!-- html2pdf for PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- JAVASCRIPT LOGIC (Disatukan) -->
     <script>
         // --- DATA STATE MANAGEMENT ---
         const db = {
@@ -919,32 +986,41 @@
             checkNotifications();
         }
 
-        // --- LAPORAN & EXPORT LOGIC ---
+        // --- LAPORAN & EXPORT LOGIC (UPDATED: 4 TABLES) ---
         function renderReport() {
-            // Render Tabel 1 (Rekap)
-            const tbodyRecap = document.getElementById('reportRecapBody');
-            const vaksinDetails = db.vaksin.map(v => v.nama).join(', ');
-            const supplierDetails = db.supplier.map(s => s.nama).join(', ');
-            const jadwalList = db.jadwal.slice(-5).map(j => `${j.tanggal} (${j.status})`).join(', ');
+            document.getElementById('currentDate').innerText = new Date().toLocaleString('id-ID');
 
-            tbodyRecap.innerHTML = `
-                <tr><td><strong>Vaksin</strong></td><td class="text-center">${db.vaksin.length}</td><td>${vaksinDetails}</td></tr>
-                <tr><td><strong>Supplier</strong></td><td class="text-center">${db.supplier.length}</td><td>${supplierDetails}</td></tr>
-                <tr><td><strong>Jadwal</strong></td><td class="text-center">${db.jadwal.length}</td><td>${jadwalList}</td></tr>
-            `;
+            // 1. Render Table Vaksin
+            const tbodyVaksinRep = document.getElementById('reportVaksinBody');
+            tbodyVaksinRep.innerHTML = '';
+            if(db.vaksin.length === 0) tbodyVaksinRep.innerHTML = '<tr><td colspan="3" class="text-center">Belum ada data</td></tr>';
+            else {
+                db.vaksin.forEach(v => {
+                    const supName = db.supplier.find(s => s.id == v.supplierId)?.nama || 'Unknown';
+                    tbodyVaksinRep.innerHTML += `<tr><td>${v.nama}</td><td class="text-center fw-bold">${v.stok}</td><td>${supName}</td></tr>`;
+                });
+            }
 
-            // Render Tabel 2 (Pembelian)
+            // 2. Render Table Supplier
+            const tbodySupRep = document.getElementById('reportSupplierBody');
+            tbodySupRep.innerHTML = '';
+            if(db.supplier.length === 0) tbodySupRep.innerHTML = '<tr><td colspan="3" class="text-center">Belum ada data</td></tr>';
+            else {
+                db.supplier.forEach(s => {
+                    tbodySupRep.innerHTML += `<tr><td>${s.nama}</td><td>${s.kontak}</td><td>${s.alamat}</td></tr>`;
+                });
+            }
+
+            // 3. Render Table Pembelian
             const tbodyPurchases = document.getElementById('reportPurchasesBody');
             tbodyPurchases.innerHTML = '';
-            if(db.pembelian.length === 0) {
-                tbodyPurchases.innerHTML = '<tr><td colspan="5" class="text-center">Belum ada data pembelian</td></tr>';
-            } else {
-                db.pembelian.forEach((p, index) => {
+            if(db.pembelian.length === 0) tbodyPurchases.innerHTML = '<tr><td colspan="4" class="text-center">Belum ada data</td></tr>';
+            else {
+                db.pembelian.forEach(p => {
                     const vaksin = db.vaksin.find(v => v.id == p.vaksinId);
                     const vaksinName = vaksin ? vaksin.nama : 'Unknown';
                     tbodyPurchases.innerHTML += `
                         <tr>
-                            <td>INV-${2024000 + p.id}</td>
                             <td>${p.tanggal}</td>
                             <td>${vaksinName}</td>
                             <td class="text-center fw-bold">${p.jumlah}</td>
@@ -953,34 +1029,69 @@
                     `;
                 });
             }
+
+            // 4. Render Table Jadwal
+            const tbodyJadwalRep = document.getElementById('reportJadwalBody');
+            tbodyJadwalRep.innerHTML = '';
+            if(db.jadwal.length === 0) tbodyJadwalRep.innerHTML = '<tr><td colspan="4" class="text-center">Belum ada data</td></tr>';
+            else {
+                db.jadwal.forEach(j => {
+                    const vName = db.vaksin.find(v => v.id == j.vaksinId)?.nama || 'Unknown';
+                    tbodyJadwalRep.innerHTML += `
+                        <tr>
+                            <td>${j.tanggal}</td>
+                            <td>${j.ternak}</td>
+                            <td>${vName}</td>
+                            <td>${j.status}</td>
+                        </tr>
+                    `;
+                });
+            }
         }
 
+        // Export Excel: 4 Sheets Berbeda
         function exportAllData() {
-            let csvContent = "data:text/csv;charset=utf-8,\uFEFF";
+            const wb = XLSX.utils.book_new();
             
-            // Bagian 1
-            csvContent += "=== BAGIAN 1: REKAPITULASI DATA ===\n\n";
-            csvContent += "Kategori,Total Data,Detail\n";
-            csvContent += `Vaksin,${db.vaksin.length},"${db.vaksin.map(v=>v.nama).join('; ')}"\n`;
-            csvContent += `Supplier,${db.supplier.length},"${db.supplier.map(s=>s.nama).join('; ')}"\n`;
-            csvContent += `Jadwal,${db.jadwal.length},"${db.jadwal.slice(-5).map(j=>j.tanggal).join('; ')}"\n`;
+            // Sheet 1: Vaksin
+            if(db.vaksin.length > 0) {
+                const wsVaksin = XLSX.utils.json_to_sheet(db.vaksin.map(v => ({
+                    "Nama Vaksin": v.nama,
+                    "Stok": v.stok,
+                    "Supplier ID": v.supplierId
+                })));
+                XLSX.utils.book_append_sheet(wb, wsVaksin, "Vaksin");
+            }
 
-            // Bagian 2
-            csvContent += "\n=== BAGIAN 2: RIWAYAT PEMBELIAN ===\n\n";
-            csvContent += "No.Faktur,Tanggal,Nama Vaksin,Jumlah,Total Harga\n";
-            db.pembelian.forEach(p => {
-                const vaksin = db.vaksin.find(v => v.id == p.vaksinId);
-                const vName = vaksin ? vaksin.nama : 'Unknown';
-                csvContent += `INV-${p.id},${p.tanggal},${vName},${p.jumlah},"${p.harga}"\n`;
-            });
+            // Sheet 2: Supplier
+            if(db.supplier.length > 0) {
+                const wsSupplier = XLSX.utils.json_to_sheet(db.supplier);
+                XLSX.utils.book_append_sheet(wb, wsSupplier, "Supplier");
+            }
 
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "laporan_keseluruhan_farm.csv");
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
+            // Sheet 3: Pembelian
+            if(db.pembelian.length > 0) {
+                const wsPembelian = XLSX.utils.json_to_sheet(db.pembelian.map(p => ({
+                    "Tanggal": p.tanggal,
+                    "Vaksin ID": p.vaksinId,
+                    "Jumlah": p.jumlah,
+                    "Harga": p.harga
+                })));
+                XLSX.utils.book_append_sheet(wb, wsPembelian, "Pembelian");
+            }
+
+            // Sheet 4: Jadwal
+            if(db.jadwal.length > 0) {
+                const wsJadwal = XLSX.utils.json_to_sheet(db.jadwal);
+                XLSX.utils.book_append_sheet(wb, wsJadwal, "Jadwal");
+            }
+
+            if(Object.keys(wb.Sheets).length === 0) {
+                alert("Tidak ada data untuk diekspor!");
+                return;
+            }
+
+            XLSX.writeFile(wb, "Laporan_Lengkap_OenFarm.xlsx");
         }
 
         // --- NOTIFICATIONS ---
@@ -1011,17 +1122,17 @@
             if(chartInstance) chartInstance.destroy();
 
             chartInstance = new Chart(ctx, {
-                type: 'line', 
+                type: 'line',
                 data: {
                     labels: labels,
                     datasets: [{
                         label: 'Stok Vaksin',
                         data: data,
-                        backgroundColor: 'rgba(46, 125, 50, 0.2)', // Transparan untuk efek area
+                        backgroundColor: 'rgba(46, 125, 50, 0.2)',
                         borderColor: 'rgba(46, 125, 50, 1)',
-                        borderWidth: 2, // Garis lebih tebal
-                        fill: true, // Isi area di bawah garis
-                        tension: 0.4, // Membuat garis melengkung (smooth curve)
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4,
                         pointRadius: 5,
                         pointBackgroundColor: '#fff',
                         pointBorderColor: '#2e7d32'
