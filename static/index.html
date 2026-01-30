@@ -8,49 +8,86 @@
     <link rel="icon" href="logo oen.jpg" onerror="this.href='https://picsum.photos/seed/farm/32/32.jpg'">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Internal CSS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
         :root {
-            --primary-color: #198754;
-            --secondary-color: #146c43;
-            --bg-light: #f8f9fa;
+            --primary-color: #10b981; 
+            --primary-hover: #059669;
+            --secondary-color: #64748b;
+            --bg-body: #f1f5f9; 
+            --surface-white: #ffffff;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--bg-light);
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-dark);
             overflow-x: hidden;
+            font-size: 0.95rem;
         }
 
-        /* --- Auth Styles --- */
+        /* Auth Styles */
         .auth-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, var(--primary-color), #0f5132);
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); 
             padding: 20px;
         }
         .auth-card {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-            padding: 2rem;
+            background: var(--surface-white);
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            padding: 2.5rem;
             width: 100%;
-            max-width: 400px;
+            max-width: 450px;
             text-align: center;
+            border: 1px solid rgba(255,255,255,0.5);
         }
         .auth-logo-img {
-            width: 120px;
-            height: 120px;
+            width: 90px;
+            height: 90px;
             object-fit: cover;
             border-radius: 50%;
-            border: 4px solid white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            border: 4px solid #fff;
+            box-shadow: var(--shadow-md);
             margin-bottom: 1.5rem;
+            background-color: #f8f9fa;
         }
 
+        /* Form Controls Modern */
+        .form-control, .form-select {
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            background-color: #f8fafc;
+        }
+        .form-control:focus, .form-select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+            background-color: #fff;
+        }
+
+        /* Buttons Modern */
+        .btn {
+            border-radius: 8px;
+            font-weight: 500;
+            padding: 0.6rem 1.2rem;
+            transition: all 0.2s;
+        }
+        .btn-success { background-color: var(--primary-color); border: none; }
+        .btn-success:hover { background-color: var(--primary-hover); transform: translateY(-1px); }
+        .btn-primary { background-color: #3b82f6; border: none; } 
+        .btn-primary:hover { background-color: #2563eb; }
+        
         /* --- Admin Layout --- */
         #admin-panel { display: none; min-height: 100vh; }
 
@@ -58,85 +95,152 @@
             height: 100vh;
             position: fixed;
             top: 0; left: 0;
-            width: 250px;
-            background-color: #343a40;
-            color: white;
+            width: 270px;
+            background-color: var(--surface-white); 
+            border-right: 1px solid var(--border-color);
+            color: var(--text-dark);
             padding-top: 20px;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             z-index: 1000;
             display: flex;
             flex-direction: column;
         }
         .sidebar-brand {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             margin-bottom: 30px;
-            padding: 0 15px;
+            padding: 0 20px;
             text-decoration: none;
-            color: white;
         }
         .sidebar-brand img {
-            width: 40px; height: 40px;
+            width: 60px; height: 60px;
             border-radius: 50%;
-            border: 2px solid #ffc107;
-            margin-right: 10px;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 10px;
+            box-shadow: var(--shadow-sm);
         }
-        .sidebar-brand h3 {
-            font-size: 1.1rem; margin: 0; color: #ffc107; font-weight: bold;
-        }
+        .sidebar-brand h3 { font-size: 1.2rem; margin: 0; color: var(--text-dark); font-weight: 700; letter-spacing: -0.5px; }
+        .user-role-badge { font-size: 0.7rem; background: #e2e8f0; color: var(--text-muted); padding: 4px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; }
+
         .sidebar a {
-            padding: 15px 25px;
+            padding: 12px 25px;
             text-decoration: none;
-            font-size: 1rem;
-            color: #d1d1d1;
-            display: block;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
             transition: 0.3s;
-            border-left: 4px solid transparent;
+            border-radius: 0 25px 25px 0; 
+            margin-right: 10px;
+            font-weight: 500;
         }
-        .sidebar a:hover, .sidebar a.active {
-            background-color: #495057;
-            color: white;
-            border-left: 4px solid var(--primary-color);
+        .sidebar a i { margin-right: 12px; width: 20px; text-align: center; font-size: 1.1rem; }
+        
+        .sidebar a:hover {
+            background-color: #f8fafc;
+            color: var(--primary-color);
         }
-        .sidebar a i { margin-right: 10px; width: 20px; text-align: center; }
+        .sidebar a.active {
+            background-color: #ecfdf5; 
+            color: var(--primary-color);
+            font-weight: 600;
+        }
 
-        .main-content { margin-left: 250px; padding: 20px; padding-bottom: 60px; }
+        .main-content { margin-left: 270px; padding: 30px; padding-bottom: 80px; }
 
-        .card-stat {
-            border: none; border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        /* Cards & Stats */
+        .card {
+            border: none; 
+            border-radius: 16px;
+            box-shadow: var(--shadow-sm);
+            background: var(--surface-white);
             transition: transform 0.2s;
+            margin-bottom: 20px;
+            border: 1px solid var(--border-color);
         }
-        .card-stat:hover { transform: translateY(-5px); }
+        .card-stat {
+            border-left: none;
+            padding: 1.5rem;
+        }
+        .card-stat:hover { transform: translateY(-5px); box-shadow: var(--shadow-md); }
+        
+        .card-header {
+            background-color: transparent;
+            border-bottom: 1px solid var(--border-color);
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
 
+        /* Table Modern */
+        .table thead th {
+            background-color: #f8fafc;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid var(--border-color);
+            padding: 1rem;
+        }
+        .table tbody td {
+            vertical-align: middle;
+            padding: 1rem;
+            color: var(--text-dark);
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 0.9rem;
+        }
+        .table-hover tbody tr:hover {
+            background-color: #f8fafc;
+        }
+
+        /* Footer */
         .footer {
-            background-color: #343a40;
-            color: white;
+            background-color: var(--surface-white);
+            border-top: 1px solid var(--border-color);
+            color: var(--text-muted);
             text-align: center;
             padding: 15px;
             position: fixed;
             bottom: 0;
             width: 100%;
             z-index: 999;
+            font-size: 0.85rem;
         }
 
-        .section-view { display: none; animation: fadeIn 0.4s ease-in-out; }
+        /* Animations */
+        .section-view { display: none; animation: slideUp 0.4s ease-out; }
         .section-view.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
-        .low-stock-badge { background-color: #dc3545; color: white; font-size: 0.7rem; padding: 2px 5px; border-radius: 4px; margin-left: 5px; }
-        .text-right { text-align: right; }
+        /* Command Card */
+        .command-card { 
+            border-left: 4px solid var(--primary-color); 
+            background: #f0fdf4; 
+            border-radius: 8px !important;
+        }
 
-        /* Toast Container */
+        /* Report Print Area Override */
+        #printable-area {
+            background-color: white;
+            padding: 40px;
+            border-radius: 0;
+            box-shadow: none;
+            border: none;
+        }
+
+        /* Custom Toast */
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 1060; }
+        .toast { border-radius: 12px; border: none; box-shadow: var(--shadow-lg); }
 
         /* Responsive */
-        @media (max-width: 768px) {
-            .sidebar { margin-left: -250px; }
-            .sidebar.active { margin-left: 0; }
+        @media (max-width: 992px) {
+            .sidebar { transform: translateX(-100%); }
+            .sidebar.active { transform: translateX(0); box-shadow: var(--shadow-lg); }
             .main-content { margin-left: 0; }
-            .footer { position: relative; margin-top: 20px; }
+            .footer { position: relative; margin-top: 40px; }
         }
     </style>
 </head>
@@ -148,29 +252,38 @@
     <!-- ================= AUTH SECTION ================= -->
     <div id="auth-section" class="auth-container">
         <div id="login-form" class="auth-card">
-            <img src="logo oen.jpg" alt="Logo" class="auth-logo-img" onerror="this.src='https://picsum.photos/seed/farm/120/120.jpg'"> 
-            <h4 class="mb-1 fw-bold text-success">OEN PETERNAKAN</h4>
-            <p class="text-muted mb-4">Sistem Manajemen Admin</p>
+            <img src="logo oen.jpg" alt="Logo" class="auth-logo-img" onerror="this.src='https://picsum.photos/seed/farm/100/100.jpg'"> 
+            <h3 class="mb-1 fw-bold" style="color: var(--text-dark)">OEN PETERNAKAN</h3>
+            <p class="text-muted mb-4">Sistem Manajemen Terintegrasi</p>
             <form onsubmit="handleLogin(event)">
-                <div class="mb-3 text-start"><label class="form-label">Username</label><input type="text" id="login-username" class="form-control" required></div>
-                <div class="mb-3 text-start"><label class="form-label">Password</label><input type="password" id="login-password" class="form-control" required></div>
-                <button type="submit" class="btn btn-success w-100 mt-2">Masuk</button>
+                <div class="mb-3 text-start"><label class="form-label small fw-bold">Username</label><input type="text" id="login-username" class="form-control" placeholder="Masukkan username" required></div>
+                <div class="mb-3 text-start"><label class="form-label small fw-bold">Password</label><input type="password" id="login-password" class="form-control" placeholder="Masukkan password" required></div>
+                <button type="submit" class="btn btn-success w-100 mt-2 shadow-sm">Masuk</button>
             </form>
-            <div class="mt-3 text-center"><small>Belum punya akun? <a href="#" onclick="toggleAuth('register')">Daftar disini</a></small></div>
+            <div class="mt-4 text-center"><small class="text-muted">Belum punya akun? <a href="#" onclick="toggleAuth('register')" class="text-decoration-none fw-bold">Daftar disini</a></small></div>
         </div>
 
         <!-- Form Register -->
         <div id="register-form" class="auth-card" style="display: none;">
-            <img src="logo oen.jpg" alt="Logo" class="auth-logo-img" onerror="this.src='https://picsum.photos/seed/farm/120/120.jpg'">
-            <h4 class="mb-1 fw-bold text-success">Daftar Akun</h4>
-            <p class="text-muted mb-4">Peternakan & Pemilik</p>
+            <img src="logo oen.jpg" alt="Logo" class="auth-logo-img" onerror="this.src='https://picsum.photos/seed/farm/100/100.jpg'">
+            <h3 class="mb-1 fw-bold" style="color: var(--text-dark)">Pendaftaran Akun</h3>
+            <p class="text-muted mb-4">Lengkapi data diri Anda</p>
             <form onsubmit="handleRegister(event)">
-                <div class="mb-3 text-start"><label class="form-label">Nama Peternak</label><input type="text" id="reg-name" class="form-control" required></div>
-                <div class="mb-3 text-start"><label class="form-label">Username</label><input type="text" id="reg-username" class="form-control" required></div>
-                <div class="mb-3 text-start"><label class="form-label">Password</label><input type="password" id="reg-password" class="form-control" required></div>
-                <button type="submit" class="btn btn-success w-100 mt-2">Daftar</button>
+                <div class="mb-3 text-start"><label class="form-label small fw-bold">Nama Lengkap</label><input type="text" id="reg-name" class="form-control" required></div>
+                <div class="mb-3 text-start"><label class="form-label small fw-bold">Username</label><input type="text" id="reg-username" class="form-control" required></div>
+                <div class="mb-3 text-start"><label class="form-label small fw-bold">Password</label><input type="password" id="reg-password" class="form-control" required></div>
+                
+                <div class="mb-3 text-start">
+                    <label class="form-label small fw-bold">Daftar Sebagai</label>
+                    <select id="reg-role" class="form-select" required>
+                        <option value="peternak">Peternak (Input/Edit Data)</option>
+                        <option value="pemilik">Pemilik peternakan (Monitoring & Perintah)</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-success w-100 mt-2 shadow-sm">Daftar</button>
             </form>
-            <div class="mt-3 text-center"><small>Sudah punya akun? <a href="#" onclick="toggleAuth('login')">Login disini</a></small></div>
+            <div class="mt-4 text-center"><small class="text-muted">Sudah punya akun? <a href="#" onclick="toggleAuth('login')" class="text-decoration-none fw-bold">Login disini</a></small></div>
         </div>
     </div>
 
@@ -178,124 +291,252 @@
     <div id="admin-panel">
         <nav class="sidebar" id="sidebar">
             <div class="sidebar-brand">
-                <img src="logo oen.jpg" alt="Logo" onerror="this.src='https://picsum.photos/seed/farm/40/40.jpg'">
+                <img src="logo oen.jpg" alt="Logo" onerror="this.src='https://picsum.photos/seed/farm/50/50.jpg'">
                 <h3>OEN ADMIN</h3>
+                <span id="current-user-role" class="user-role-badge">Role</span>
             </div>
+            
             <a href="#" onclick="showSection('dashboard')" id="nav-dashboard" class="active"><i class="fas fa-home"></i> Dashboard</a>
-            <a href="#" onclick="showSection('vaksin')" id="nav-vaksin"><i class="fas fa-syringe"></i> Vaksin</a>
-            <a href="#" onclick="showSection('supplier')" id="nav-supplier"><i class="fas fa-truck"></i> Supplier</a>
+            <a href="#" onclick="showSection('vaksin')" id="nav-vaksin"><i class="fas fa-syringe"></i> Data Vaksin</a>
+            <a href="#" onclick="showSection('supplier')" id="nav-supplier"><i class="fas fa-truck"></i> Data Supplier</a>
             <a href="#" onclick="showSection('pembelian')" id="nav-pembelian"><i class="fas fa-shopping-cart"></i> Pembelian Vaksin</a>
             <a href="#" onclick="showSection('jadwal')" id="nav-jadwal"><i class="fas fa-calendar-alt"></i> Jadwal Vaksin</a>
-            <a href="#" onclick="showSection('laporan')" id="nav-laporan"><i class="fas fa-file-pdf"></i> Laporan Data</a>
-            <a href="#" onclick="showSection('activity')" id="nav-activity"><i class="fas fa-history"></i> Riwayat Aktivitas</a>
-            <a href="#" onclick="handleLogout()" class="mt-4 text-danger"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            <a href="#" onclick="showSection('perintah')" id="nav-perintah"><i class="fas fa-bullhorn"></i> Pesan Pemilik Peternakan</a>
+            <a href="#" onclick="showSection('laporan')" id="nav-laporan"><i class="fas fa-file-pdf"></i> Laporan</a>
+            
+            <div class="mt-auto px-3 mb-4">
+                <button onclick="handleLogout()" class="btn btn-outline-danger w-100 rounded-pill"><i class="fas fa-sign-out-alt me-2"></i> Logout</button>
+            </div>
         </nav>
 
         <div class="main-content">
-            <button class="btn btn-dark d-md-none mb-3" onclick="document.getElementById('sidebar').classList.toggle('active')"><i class="fas fa-bars"></i> Menu</button>
+            <!-- Mobile Toggle -->
+            <button class="btn btn-light border mb-4 d-lg-none shadow-sm" onclick="document.getElementById('sidebar').classList.toggle('active')">
+                <i class="fas fa-bars text-dark"></i> Menu
+            </button>
 
-            <div class="container-fluid">
+            <div class="container-fluid p-0">
                 
                 <!-- 1. DASHBOARD -->
                 <div id="section-dashboard" class="section-view active">
-                    <h2 class="mb-4">Dashboard Vaksin Oen Peternakan</h2>
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-3"><div class="card card-stat bg-primary text-white p-3"><h5>Total Vaksin</h5><h2 id="dash-total-vaksin">0</h2></div></div>
-                        <div class="col-md-3"><div class="card card-stat bg-warning text-dark p-3"><h5>Stok Menipis (< 3)</h5><h2 id="dash-low-stock">0</h2></div></div>
-                        <div class="col-md-3"><div class="card card-stat bg-success text-white p-3"><h5>Total Transaksi</h5><h2 id="dash-transaksi">0</h2></div></div>
-                        <div class="col-md-3"><div class="card card-stat bg-info text-white p-3"><h5>Supplier</h5><h2 id="dash-supplier">0</h2></div></div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Dashboard</h2>
+                        <span class="badge bg-light text-dark border px-3 py-2 rounded-pill shadow-sm" id="welcome-badge">Selamat Datang</span>
                     </div>
-                    <div class="card shadow-sm"><div class="card-header bg-white"><h5 class="mb-0">Grafik Stok Vaksin</h5></div><div class="card-body"><canvas id="stockChart"></canvas></div></div>
+                    
+                    <div class="row g-4 mb-4">
+                        <div class="col-md-3">
+                            <div class="card card-stat bg-white border-start border-4 border-success shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><h6 class="text-muted mb-1">Total Vaksin</h6><h3 class="fw-bold mb-0 text-dark" id="dash-total-vaksin">0</h3></div>
+                                    <div class="bg-success bg-opacity-10 p-3 rounded-circle"><i class="fas fa-boxes text-success fa-lg"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-stat bg-white border-start border-4 border-warning shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><h6 class="text-muted mb-1">Stok Menipis</h6><h3 class="fw-bold mb-0 text-dark" id="dash-low-stock">0</h3></div>
+                                    <div class="bg-warning bg-opacity-10 p-3 rounded-circle"><i class="fas fa-exclamation-triangle text-warning fa-lg"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-stat bg-white border-start border-4 border-primary shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><h6 class="text-muted mb-1">Transaksi</h6><h3 class="fw-bold mb-0 text-dark" id="dash-transaksi">0</h3></div>
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle"><i class="fas fa-exchange-alt text-primary fa-lg"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="card card-stat bg-white border-start border-4 border-info shadow-sm">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div><h6 class="text-muted mb-1">Supplier</h6><h3 class="fw-bold mb-0 text-dark" id="dash-supplier">0</h3></div>
+                                    <div class="bg-info bg-opacity-10 p-3 rounded-circle"><i class="fas fa-truck text-info fa-lg"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="dashboard-commands-widget" class="card shadow-sm mb-4 border-warning" style="display:none;">
+                        <div class="card-header bg-transparent border-warning text-warning fw-bold"><i class="fas fa-exclamation-circle me-2"></i> Pesan dari Pemilik Peternakan</div>
+                        <div class="card-body bg-light" id="dashboard-commands-list" style="max-height: 200px; overflow-y: auto;"></div>
+                    </div>
+
+                    <div class="card shadow-sm"><div class="card-header bg-transparent"><h5 class="mb-0">Grafik Stok Vaksin</h5></div><div class="card-body"><canvas id="stockChart"></canvas></div></div>
                 </div>
 
                 <!-- 2. VAKSIN -->
                 <div id="section-vaksin" class="section-view">
-                    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Manajemen Vaksin</h2><button class="btn btn-success" onclick="prepareVaksinModal()"><i class="fas fa-plus"></i> Add Data</button></div>
-                    <div class="card shadow-sm"><div class="card-body"><table class="table table-hover align-middle"><thead class="table-dark"><tr><th>Nama Vaksin</th><th>Supplier</th><th>Stok</th><th>Status</th><th>Aksi</th></tr></thead><tbody id="table-vaksin-body"></tbody></table></div></div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Manajemen Vaksin</h2>
+                        <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="prepareVaksinModal()"><i class="fas fa-plus me-2"></i> Tambah Data</button>
+                    </div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Vaksin</th><th>Supplier</th><th>Stok</th><th>Status</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-vaksin-body"></tbody></table></div></div></div>
                 </div>
 
                 <!-- 3. SUPPLIER -->
                 <div id="section-supplier" class="section-view">
-                    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Daftar Supplier</h2><button class="btn btn-success" onclick="prepareSupplierModal()"><i class="fas fa-plus"></i> Add Data</button></div>
-                    <div class="card shadow-sm"><div class="card-body"><table class="table table-hover"><thead class="table-dark"><tr><th>Nama Supplier</th><th>Kontak</th><th>Alamat</th><th>Status Stok Vaksin</th><th>Aksi</th></tr></thead><tbody id="table-supplier-body"></tbody></table></div></div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Daftar Supplier</h2>
+                        <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="prepareSupplierModal()"><i class="fas fa-plus me-2"></i> Tambah Data</button>
+                    </div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Supplier</th><th>Kontak</th><th>Alamat</th><th>Status Stok</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-supplier-body"></tbody></table></div></div></div>
                 </div>
 
                 <!-- 4. PEMBELIAN VAKSIN -->
                 <div id="section-pembelian" class="section-view">
-                    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Pembelian Vaksin</h2><button class="btn btn-success" onclick="preparePurchaseModal()"><i class="fas fa-plus"></i> Add Data</button></div>
-                    <div class="card shadow-sm"><div class="card-body"><table class="table table-hover"><thead class="table-dark"><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Masuk</th><th>Harga / Dosis</th><th>Subtotal</th><th>Aksi</th></tr></thead><tbody id="table-pembelian-body"></tbody></table></div></div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Pembelian Vaksin</h2>
+                        <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="preparePurchaseModal()"><i class="fas fa-plus me-2"></i> Beli Baru</button>
+                    </div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Pembelian Vaksin Perbotol</th><th>Harga / Botol</th><th>Subtotal</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-pembelian-body"></tbody></table></div></div></div>
                 </div>
 
-                <!-- 5. JADWAL VAKSIN -->
+                <!-- 5. JADWAL VAKSIN (UPDATED) -->
                 <div id="section-jadwal" class="section-view">
-                    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Jadwal Vaksinasi</h2><button class="btn btn-success" onclick="prepareScheduleModal()"><i class="fas fa-plus"></i> Add Data</button></div>
-                    <div class="card shadow-sm"><div class="card-body"><table class="table table-hover"><thead class="table-dark"><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Pakai</th><th>Keterangan</th><th>Aksi</th></tr></thead><tbody id="table-jadwal-body"></tbody></table></div></div>
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Jadwal Vaksinasi</h2>
+                        <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="prepareScheduleModal()"><i class="fas fa-plus me-2"></i> Buat Jadwal</button>
+                    </div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0">
+                        <thead class="bg-light">
+                            <tr>
+                                <th>Tanggal</th>
+                                <th>Vaksin</th>
+                                <th class="text-center">Stok Awal</th>
+                                <th class="text-center">Jumlah Pakai</th>
+                                <th class="text-center">Sisa Stok</th>
+                                <th>Keterangan</th>
+                                <th class="role-col-action">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="table-jadwal-body"></tbody>
+                    </table></div></div></div>
                 </div>
 
-                <!-- 6. LAPORAN -->
-                <div id="section-laporan" class="section-view">
-                    <div class="d-flex justify-content-between align-items-center mb-3"><h2>Laporan & Ringkasan</h2><button class="btn btn-danger" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> Export PDF</button></div>
-                    <div id="printable-area">
-                        <div class="mb-3 text-center"><h3 class="fw-bold text-dark">LAPORAN LENGKAP PETERNAKAN OEN</h3><p class="text-muted" id="report-date-print">Dicetak pada: -</p></div>
-                        <div class="card shadow-sm mb-4"><div class="card-header bg-success text-white">Tabel Stok Vaksin Saat Ini</div><div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Nama</th><th>Supplier</th><th>Stok Akhir</th></tr></thead><tbody id="report-vaksin-body"></tbody></table></div></div>
-                        <div class="card shadow-sm mb-4"><div class="card-header bg-primary text-white">Tabel Supplier</div><div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Nama</th><th>Kontak</th><th>Alamat</th></tr></thead><tbody id="report-supplier-body"></tbody></table></div></div>
-                        <div class="card shadow-sm mb-4"><div class="card-header bg-warning text-dark">Tabel Jadwal Vaksinasi</div><div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Dipakai</th><th>Ket</th></tr></thead><tbody id="report-jadwal-body"></tbody></table></div></div>
-                        <div class="card shadow-sm mb-4"><div class="card-header bg-info text-white d-flex justify-content-between align-items-center"><span>Tabel Pembelian Vaksin</span><span class="fw-bold text-white">Total Belanja: <span id="report-total-pembelian">Rp 0</span></span></div><div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Tanggal</th><th>Vaksin</th><th class="text-right">Jumlah</th><th class="text-right">Harga (Rp)</th><th class="text-right">Subtotal (Rp)</th></tr></thead><tbody id="report-pembelian-body"></tbody></table></div></div>
+                <!-- 6. PERINTAH PEMILIK -->
+                <div id="section-perintah" class="section-view">
+                    <h2 class="fw-bold mb-4">Papan Pesan Instruksi</h2>
+                    
+                    <div id="command-input-area" class="card mb-4 border-primary shadow-sm" style="display:none;">
+                        <div class="card-header bg-transparent text-primary fw-bold">Buat Pesan Baru</div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label">Pesan</label>
+                                <textarea id="cmd-text" class="form-control" rows="3" placeholder="Contoh: Segera cek stok vaksin SVD besok pagi."></textarea>
+                            </div>
+                            <button class="btn btn-primary rounded-pill shadow-sm" onclick="addCommand()"><i class="fas fa-paper-plane me-2"></i> Kirim Pesan</button>
+                        </div>
+                    </div>
+
+                    <div class="card shadow-sm">
+                        <div class="card-header bg-transparent fw-bold">Riwayat Pesan</div>
+                        <div class="card-body p-0">
+                            <ul class="list-group list-group-flush" id="command-list"></ul>
+                        </div>
                     </div>
                 </div>
 
-                <!-- 7. RIWAYAT AKTIVITAS -->
-                <div id="section-activity" class="section-view">
-                    <h2 class="mb-4">Riwayat Aktivitas (Audit Log)</h2>
-                    <div class="card shadow-sm mb-4"><div class="card-header bg-dark text-white">Log Login, Edit, Delete, dan Transaksi</div><div class="card-body" style="max-height: 500px; overflow-y: auto;"><ul class="list-group list-group-flush" id="audit-log-list"></ul></div></div>
+                <!-- 7. LAPORAN (UPDATED) -->
+                <div id="section-laporan" class="section-view">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="fw-bold">Laporan & Ringkasan</h2>
+                        <button class="btn btn-danger rounded-pill shadow-sm" onclick="exportPDF()"><i class="fas fa-file-pdf me-2"></i> Export PDF</button>
+                    </div>
+                    <div id="printable-area">
+                        <div class="mb-5 text-center">
+                            <h3 class="fw-bold text-dark mb-2">LAPORAN LENGKAP PETERNAKAN OEN</h3>
+                            <p class="text-muted" id="report-date-print">Dicetak pada: -</p>
+                        </div>
+
+                        <!-- Tabel Stok -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-light text-success fw-bold">Tabel Stok Vaksin Saat Ini</div>
+                            <div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Nama Vaksin</th><th>Stok Akhir</th></tr></thead><tbody id="report-vaksin-body"></tbody></table></div>
+                        </div>
+
+                        <!-- Tabel Supplier -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-light text-primary fw-bold">Tabel Supplier</div>
+                            <div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Nama Supplier</th><th>Kontak</th><th>Alamat</th></tr></thead><tbody id="report-supplier-body"></tbody></table></div>
+                        </div>
+
+                        <!-- Tabel Pembelian -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-light text-warning fw-bold d-flex justify-content-between align-items-center">
+                                <span>Tabel Pembelian Vaksin</span>
+                                <span class="fw-bold text-dark">Total Belanja: <span id="report-total-pembelian">Rp 0</span></span>
+                            </div>
+                            <div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Tanggal</th><th>Vaksin</th><th class="text-end">Jumlah</th><th class="text-end">Harga (Rp)</th><th class="text-end">Subtotal (Rp)</th></tr></thead><tbody id="report-pembelian-body"></tbody></table></div>
+                        </div>
+
+                        <!-- Tabel Jadwal (Updated Headers) -->
+                        <div class="card shadow-sm mb-4">
+                            <div class="card-header bg-light text-danger fw-bold">Tabel Jadwal Vaksinasi</div>
+                            <div class="card-body">
+                                <table class="table table-bordered table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th>Tanggal</th>
+                                            <th>Vaksin</th>
+                                            <th class="text-center">Stok Awal</th>
+                                            <th class="text-center">Jumlah Pakai</th>
+                                            <th class="text-center">Sisa Stok</th>
+                                            <th>Keterangan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="report-jadwal-body"></tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <footer class="footer"><div class="container"><span>&copy; 2026 Sistem Peternakan Modern.</span></div></footer>
+        <footer class="footer"><div class="container"><span class="fw-bold text-dark">OEN PETERNAKAN</span> &copy; 2026</div></footer>
     </div>
 
     <!-- ================= MODALS ================= -->
     <!-- Modal Vaksin -->
-    <div class="modal fade" id="modalVaksin" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Form Vaksin</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formVaksin"><input type="hidden" id="vaksin-id"><div class="mb-3"><label>Nama Vaksin</label><input type="text" id="vaksin-nama" class="form-control" required></div><div class="mb-3"><label>Supplier</label><select id="vaksin-supplier" class="form-select" required></select></div><div class="mb-3"><label>Stok Awal</label><input type="number" id="vaksin-stok" class="form-control" min="0" required></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary" onclick="saveVaksin()">Simpan</button></div></div></div></div>
+    <div class="modal fade" id="modalVaksin" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg"><div class="modal-header border-bottom"><h5 class="modal-title fw-bold">Form Vaksin</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formVaksin"><input type="hidden" id="vaksin-id"><div class="mb-3"><label class="form-label small fw-bold">Nama Vaksin</label><input type="text" id="vaksin-nama" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Supplier</label><select id="vaksin-supplier" class="form-select" required></select></div><div class="mb-3"><label class="form-label small fw-bold">Stok Awal</label><input type="number" id="vaksin-stok" class="form-control" min="0" required></div></form></div><div class="modal-footer border-top"><button type="button" class="btn btn-light text-muted rounded-pill" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary rounded-pill" onclick="saveVaksin()">Simpan</button></div></div></div></div>
+    
     <!-- Modal Supplier -->
-    <div class="modal fade" id="modalSupplier" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Form Supplier</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formSupplier"><input type="hidden" id="supplier-id"><div class="mb-3"><label>Nama Supplier</label><input type="text" id="supplier-nama" class="form-control" required></div><div class="mb-3"><label>Kontak (Telp/WA)</label><input type="text" id="supplier-kontak" class="form-control" required></div><div class="mb-3"><label>Alamat</label><textarea id="supplier-alamat" class="form-control" required></textarea></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary" onclick="saveSupplier()">Simpan</button></div></div></div></div>
+    <div class="modal fade" id="modalSupplier" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg"><div class="modal-header border-bottom"><h5 class="modal-title fw-bold">Form Supplier</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formSupplier"><input type="hidden" id="supplier-id"><div class="mb-3"><label class="form-label small fw-bold">Nama Supplier</label><input type="text" id="supplier-nama" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Kontak</label><input type="text" id="supplier-kontak" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Alamat</label><textarea id="supplier-alamat" class="form-control" required></textarea></div></form></div><div class="modal-footer border-top"><button type="button" class="btn btn-light text-muted rounded-pill" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary rounded-pill" onclick="saveSupplier()">Simpan</button></div></div></div></div>
+    
     <!-- Modal Pembelian -->
-    <div class="modal fade" id="modalPembelian" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Beli Vaksin (Tambah Stok)</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formPembelian"><input type="hidden" id="pembelian-id"><div class="mb-3"><label>Tanggal</label><input type="date" id="pembelian-tanggal" class="form-control" required></div><div class="mb-3"><label>Vaksin</label><select id="pembelian-vaksin" class="form-select" required></select></div><div class="mb-3"><label>Jumlah Beli</label><input type="number" id="pembelian-jumlah" class="form-control" min="1" required></div><div class="mb-3"><label>Harga per Dosis (Rp)</label><input type="number" id="pembelian-harga" class="form-control" min="0" placeholder="Contoh: 15000" required></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary" onclick="savePembelian()">Simpan</button></div></div></div></div>
+    <div class="modal fade" id="modalPembelian" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg"><div class="modal-header border-bottom"><h5 class="modal-title fw-bold">Beli Vaksin</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formPembelian"><input type="hidden" id="pembelian-id"><div class="mb-3"><label class="form-label small fw-bold">Tanggal</label><input type="date" id="pembelian-tanggal" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Vaksin</label><select id="pembelian-vaksin" class="form-select" required></select></div><div class="mb-3"><label class="form-label small fw-bold">Jumlah Beli</label><input type="number" id="pembelian-jumlah" class="form-control" min="1" required></div><div class="mb-3"><label class="form-label small fw-bold">Harga per Botol</label><input type="number" id="pembelian-harga" class="form-control" min="0" required></div></form></div><div class="modal-footer border-top"><button type="button" class="btn btn-light text-muted rounded-pill" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary rounded-pill" onclick="savePembelian()">Simpan</button></div></div></div></div>
+    
     <!-- Modal Jadwal -->
-    <div class="modal fade" id="modalJadwal" tabindex="-1"><div class="modal-dialog"><div class="modal-content"><div class="modal-header"><h5 class="modal-title">Jadwal Vaksinasi (Kurangi Stok)</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formJadwal"><input type="hidden" id="jadwal-id"><div class="mb-3"><label>Tanggal</label><input type="date" id="jadwal-tanggal" class="form-control" required></div><div class="mb-3"><label>Vaksin</label><select id="jadwal-vaksin" class="form-select" required></select></div><div class="mb-3"><label>Jumlah Pakai</label><input type="number" id="jadwal-jumlah" class="form-control" min="1" required></div><div class="mb-3"><label>Keterangan</label><input type="text" id="jadwal-ket" class="form-control" placeholder="Contoh: Untuk Sapi A & B"></div></form></div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary" onclick="saveJadwal()">Simpan</button></div></div></div></div>
+    <div class="modal fade" id="modalJadwal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg"><div class="modal-header border-bottom"><h5 class="modal-title fw-bold">Jadwal Vaksinasi</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formJadwal"><input type="hidden" id="jadwal-id"><div class="mb-3"><label class="form-label small fw-bold">Tanggal</label><input type="date" id="jadwal-tanggal" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Vaksin</label><select id="jadwal-vaksin" class="form-select" required></select></div><div class="mb-3"><label class="form-label small fw-bold">Jumlah Pakai</label><input type="number" id="jadwal-jumlah" class="form-control" min="1" required></div><div class="mb-3"><label class="form-label small fw-bold">Keterangan</label><input type="text" id="jadwal-ket" class="form-control"></div></form></div><div class="modal-footer border-top"><button type="button" class="btn btn-light text-muted rounded-pill" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary rounded-pill" onclick="saveJadwal()">Simpan</button></div></div></div></div>
 
     <!-- External Libraries Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 
-    <!-- Internal JavaScript (Gabungan) -->
+    <!-- Internal JavaScript -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const db = loadDB();
-            if(!db.users || db.users.length === 0) {
-                // Opsional: Buat user default
-                // db.users.push({name:'Admin', username:'admin', password:'123', role:'admin'});
-                // saveDB(db);
-            }
+            if(!db.users || db.users.length === 0) { }
         });
 
         // --- 1. STATE MANAGEMENT ---
-        const DB_KEY = 'FarmDB_Secure';
+        const DB_KEY = 'FarmDB_Secure_v3';
         let currentUser = null;
         let chartInstance = null;
 
-        const initialDB = { users: [], vaccines: [], suppliers: [], purchases: [], schedules: [], logs: [] };
+        const initialDB = { users: [], vaccines: [], suppliers: [], purchases: [], schedules: [], commands: [], logs: [] };
 
         function loadDB() {
             const data = localStorage.getItem(DB_KEY);
             return data ? JSON.parse(data) : initialDB;
         }
 
-        function saveDB(data) {
-            localStorage.setItem(DB_KEY, JSON.stringify(data));
-        }
+        function saveDB(data) { localStorage.setItem(DB_KEY, JSON.stringify(data)); }
 
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
@@ -304,9 +545,13 @@
         function addLog(action) {
             const db = loadDB();
             db.logs.unshift({ timestamp: new Date().toLocaleString('id-ID'), user: currentUser ? currentUser.username : 'System', action: action });
-            if(db.logs.length > 100) db.logs.pop();
+            if(db.logs.length > 50) db.logs.pop();
             saveDB(db);
         }
+
+        // --- HELPER: CEK ROLE ---
+        function isPeternak() { return currentUser && currentUser.role === 'peternak'; }
+        function isPemilik() { return currentUser && currentUser.role === 'pemilik'; }
 
         // --- 2. AUTHENTICATION ---
         function toggleAuth(type) {
@@ -319,9 +564,10 @@
             const name = document.getElementById('reg-name').value;
             const user = document.getElementById('reg-username').value;
             const pass = document.getElementById('reg-password').value;
+            const role = document.getElementById('reg-role').value;
             const db = loadDB();
             if (db.users.find(u => u.username === user)) { showToast('Username sudah ada!', 'danger'); return; }
-            db.users.push({ name, username: user, password: pass, role: 'peternak' });
+            db.users.push({ name, username: user, password: pass, role: role });
             saveDB(db); showToast('Registrasi berhasil! Silakan login.', 'success'); toggleAuth('login'); e.target.reset();
         }
 
@@ -335,12 +581,11 @@
                 currentUser = account;
                 document.getElementById('auth-section').style.display = 'none';
                 document.getElementById('admin-panel').style.display = 'block';
-                addLog(`User ${user} login`);
+                applyRolePermissions();
+                addLog(`User ${user} (${account.role}) login`);
                 initDashboard();
                 showToast(`Selamat datang, ${account.name}`, 'success');
-            } else {
-                showToast('Username atau password salah', 'danger');
-            }
+            } else { showToast('Username atau password salah', 'danger'); }
         }
 
         function handleLogout() {
@@ -352,20 +597,37 @@
             document.getElementById('login-password').value = '';
         }
 
+        function applyRolePermissions() {
+            document.getElementById('current-user-role').innerText = currentUser.role;
+            document.getElementById('welcome-badge').innerText = `Login sebagai: ${currentUser.name}`;
+            const editBtns = document.querySelectorAll('.role-btn-edit');
+            const actionCols = document.querySelectorAll('.role-col-action');
+            if(!isPeternak()) {
+                editBtns.forEach(btn => btn.style.display = 'none');
+                actionCols.forEach(col => col.style.display = 'none');
+                document.getElementById('command-input-area').style.display = 'block';
+            } else {
+                editBtns.forEach(btn => btn.style.display = 'inline-block');
+                actionCols.forEach(col => col.style.display = 'table-cell');
+                document.getElementById('command-input-area').style.display = 'none';
+            }
+            renderCommandsWidget();
+        }
+
         // --- 3. NAVIGATION ---
         function showSection(sectionId) {
             document.querySelectorAll('.sidebar a').forEach(el => el.classList.remove('active'));
-            document.getElementById('nav-' + sectionId).classList.add('active');
+            const navItem = document.getElementById('nav-' + sectionId);
+            if(navItem) navItem.classList.add('active');
             document.querySelectorAll('.section-view').forEach(el => el.classList.remove('active'));
             document.getElementById('section-' + sectionId).classList.add('active');
-
             if(sectionId === 'dashboard') initDashboard();
             if(sectionId === 'vaksin') renderVaksinTable();
             if(sectionId === 'supplier') renderSupplierTable();
             if(sectionId === 'pembelian') renderPembelianTable();
             if(sectionId === 'jadwal') renderJadwalTable();
             if(sectionId === 'laporan') renderLaporan(); 
-            if(sectionId === 'activity') renderActivityLog(); 
+            if(sectionId === 'perintah') renderCommandsPage(); 
         }
 
         // --- 4. LOGIC: VAKSIN ---
@@ -376,65 +638,50 @@
             db.vaccines.forEach(v => {
                 const supplier = db.suppliers.find(s => s.id == v.supplierId);
                 const supplierName = supplier ? supplier.name : 'Unknown';
-                let statusBadge = `<span class="badge bg-success">Aman</span>`;
-                if(v.stock <= 2) { statusBadge = `<span class="badge bg-danger">Stok Menipis!</span>`; showToast(`Peringatan: Stok ${v.name} tersisa ${v.stock}`, 'warning'); }
-                const tr = `<tr><td>${v.name}</td><td>${supplierName}</td><td>${v.stock}</td><td>${statusBadge}</td><td><button class="btn btn-sm btn-warning" onclick="editVaksin(${v.id})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteVaksin(${v.id})"><i class="fas fa-trash"></i></button></td></tr>`;
+                let statusBadge = `<span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Aman</span>`;
+                if(v.stock <= 2) { statusBadge = `<span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Stok Menipis!</span>`; }
+                let actionHtml = isPeternak() ? 
+                    `<button class="btn btn-sm btn-light text-warning border" onclick="editVaksin(${v.id})"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-light text-danger border" onclick="deleteVaksin(${v.id})"><i class="fas fa-trash"></i></button>` : `<span class="text-muted small">-</span>`;
+                const tr = `<tr><td class="fw-bold">${v.name}</td><td>${supplierName}</td><td>${v.stock}</td><td>${statusBadge}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
-
-        function openModal(id) {
-            const modal = new bootstrap.Modal(document.getElementById(id));
-            modal.show();
-        }
-
         function prepareVaksinModal() {
+            if(!isPeternak()) return showToast('Akses Ditolak', 'danger');
             document.getElementById('formVaksin').reset();
             document.getElementById('vaksin-id').value = '';
             populateSupplierSelect('vaksin-supplier'); 
             openModal('modalVaksin');
         }
-
         function saveVaksin() {
+            if(!isPeternak()) return;
             const id = document.getElementById('vaksin-id').value;
             const name = document.getElementById('vaksin-nama').value;
             const supplierId = document.getElementById('vaksin-supplier').value;
             const stock = parseInt(document.getElementById('vaksin-stok').value);
             const db = loadDB();
-            if(id) {
-                const v = db.vaccines.find(x => x.id == id);
-                v.name = name; v.supplierId = supplierId; v.stock = stock; 
-                addLog(`Edit Vaksin ${name}`);
-            } else {
-                const newId = Date.now();
-                db.vaccines.push({ id: newId, name, supplierId, stock });
-                addLog(`Tambah Vaksin baru: ${name}`);
-            }
+            if(id) { const v = db.vaccines.find(x => x.id == id); v.name = name; v.supplierId = supplierId; v.stock = stock; addLog(`Edit Vaksin ${name}`); } 
+            else { db.vaccines.push({ id: Date.now(), name, supplierId, stock }); addLog(`Tambah Vaksin: ${name}`); }
             saveDB(db);
             bootstrap.Modal.getInstance(document.getElementById('modalVaksin')).hide();
             renderVaksinTable();
             showToast('Data Vaksin tersimpan', 'success');
         }
-
         function editVaksin(id) {
-            const db = loadDB();
-            const v = db.vaccines.find(x => x.id == id);
-            populateSupplierSelect('vaksin-supplier'); 
-            document.getElementById('vaksin-id').value = v.id;
+            if(!isPeternak()) return;
+            const db = loadDB(); const v = db.vaccines.find(x => x.id == id);
+            populateSupplierSelect('vaksin-supplier'); document.getElementById('vaksin-id').value = v.id;
             document.getElementById('vaksin-nama').value = v.name;
             document.getElementById('vaksin-supplier').value = v.supplierId;
             document.getElementById('vaksin-stok').value = v.stock;
             openModal('modalVaksin');
         }
-
         function deleteVaksin(id) {
+            if(!isPeternak()) return showToast('Akses Ditolak', 'danger');
             if(!confirm('Hapus vaksin ini?')) return;
-            const db = loadDB();
-            const v = db.vaccines.find(x => x.id == id);
+            const db = loadDB(); const v = db.vaccines.find(x => x.id == id);
             db.vaccines = db.vaccines.filter(x => x.id != id);
-            addLog(`Hapus Vaksin: ${v.name}`);
-            saveDB(db);
-            renderVaksinTable();
+            addLog(`Hapus Vaksin: ${v.name}`); saveDB(db); renderVaksinTable();
         }
 
         // --- 5. LOGIC: SUPPLIER ---
@@ -444,59 +691,35 @@
             tbody.innerHTML = '';
             db.suppliers.forEach(s => {
                 const relatedVaccines = db.vaccines.filter(v => v.supplierId == s.id);
-                let stockStatus = '<span class="text-success">Stok Aman</span>';
-                relatedVaccines.forEach(v => { if(v.stock <= 2) stockStatus = '<span class="text-danger fw-bold">ADA VAKSIN STOK < 2!</span>'; });
-                const tr = `<tr><td>${s.name}</td><td>${s.contact}</td><td>${s.address}</td><td>${stockStatus}</td><td><button class="btn btn-sm btn-warning" onclick="editSupplier(${s.id})"><i class="fas fa-edit"></i></button><button class="btn btn-sm btn-danger" onclick="deleteSupplier(${s.id})"><i class="fas fa-trash"></i></button></td></tr>`;
+                let stockStatus = '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Stok Aman</span>';
+                relatedVaccines.forEach(v => { if(v.stock <= 2) stockStatus = '<span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>ADA STOK < 2</span>'; });
+                let actionHtml = isPeternak() ? 
+                    `<button class="btn btn-sm btn-light text-warning border" onclick="editSupplier(${s.id})"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-light text-danger border" onclick="deleteSupplier(${s.id})"><i class="fas fa-trash"></i></button>` : `<span class="text-muted small">-</span>`;
+                const tr = `<tr><td class="fw-bold">${s.name}</td><td>${s.contact}</td><td>${s.address}</td><td>${stockStatus}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
-
         function prepareSupplierModal() {
+            if(!isPeternak()) return;
             document.getElementById('formSupplier').reset();
             document.getElementById('supplier-id').value = '';
             openModal('modalSupplier');
         }
-
         function saveSupplier() {
+            if(!isPeternak()) return;
             const id = document.getElementById('supplier-id').value;
             const name = document.getElementById('supplier-nama').value;
             const contact = document.getElementById('supplier-kontak').value;
             const address = document.getElementById('supplier-alamat').value;
             const db = loadDB();
-            if(id) {
-                const s = db.suppliers.find(x => x.id == id);
-                if(s) {
-                    s.name = name; s.contact = contact; s.address = address;
-                    addLog(`Edit Supplier: ${name}`);
-                }
-            } else {
-                db.suppliers.push({ id: Date.now(), name, contact, address });
-                addLog(`Tambah Supplier: ${name}`);
-            }
-            saveDB(db);
-            bootstrap.Modal.getInstance(document.getElementById('modalSupplier')).hide();
-            renderSupplierTable();
-            showToast('Data Supplier tersimpan', 'success');
+            if(id) { const s = db.suppliers.find(x => x.id == id); if(s) { s.name = name; s.contact = contact; s.address = address; addLog(`Edit Supplier: ${name}`); } } 
+            else { db.suppliers.push({ id: Date.now(), name, contact, address }); addLog(`Tambah Supplier: ${name}`); }
+            saveDB(db); bootstrap.Modal.getInstance(document.getElementById('modalSupplier')).hide(); renderSupplierTable(); showToast('Data Supplier tersimpan', 'success');
         }
-
-        function editSupplier(id) {
-            const db = loadDB();
-            const s = db.suppliers.find(x => x.id == id);
-            document.getElementById('supplier-id').value = s.id;
-            document.getElementById('supplier-nama').value = s.name;
-            document.getElementById('supplier-kontak').value = s.contact;
-            document.getElementById('supplier-alamat').value = s.address;
-            openModal('modalSupplier');
+        function editSupplier(id) { if(!isPeternak()) return; const db = loadDB(); const s = db.suppliers.find(x => x.id == id);
+            document.getElementById('supplier-id').value = s.id; document.getElementById('supplier-nama').value = s.name; document.getElementById('supplier-kontak').value = s.contact; document.getElementById('supplier-alamat').value = s.address; openModal('modalSupplier');
         }
-
-        function deleteSupplier(id) {
-            if(!confirm('Hapus supplier?')) return;
-            const db = loadDB();
-            db.suppliers = db.suppliers.filter(x => x.id != id);
-            addLog(`Hapus Supplier ID ${id}`);
-            saveDB(db);
-            renderSupplierTable();
-        }
+        function deleteSupplier(id) { if(!isPeternak()) return; if(!confirm('Hapus supplier?')) return; const db = loadDB(); db.suppliers = db.suppliers.filter(x => x.id != id); addLog(`Hapus Supplier ID ${id}`); saveDB(db); renderSupplierTable(); }
 
         // --- 6. LOGIC: PEMBELIAN ---
         function populateSupplierSelect(elementId) {
@@ -505,23 +728,21 @@
             select.innerHTML = '<option value="">Pilih Supplier</option>';
             db.suppliers.forEach(s => { select.innerHTML += `<option value="${s.id}">${s.name}</option>`; });
         }
-
         function populateVaccineSelect(elementId) {
             const db = loadDB();
             const select = document.getElementById(elementId);
             select.innerHTML = '<option value="">Pilih Vaksin</option>';
             db.vaccines.forEach(v => { select.innerHTML += `<option value="${v.id}">${v.name} (Stok: ${v.stock})</option>`; });
         }
-
         function preparePurchaseModal() {
+            if(!isPeternak()) return;
             document.getElementById('formPembelian').reset();
-            document.getElementById('pembelian-id').value = '';
             document.getElementById('pembelian-tanggal').valueAsDate = new Date();
             populateVaccineSelect('pembelian-vaksin');
             openModal('modalPembelian');
         }
-
         function savePembelian() {
+            if(!isPeternak()) return;
             const vaccineId = document.getElementById('pembelian-vaksin').value;
             const qty = parseInt(document.getElementById('pembelian-jumlah').value);
             const price = parseFloat(document.getElementById('pembelian-harga').value) || 0;
@@ -530,17 +751,9 @@
             const db = loadDB();
             db.purchases.push({ id: Date.now(), date: date, vaccineId: parseInt(vaccineId), qty: qty, price: price });
             const vIndex = db.vaccines.findIndex(v => v.id == vaccineId);
-            if(vIndex > -1) {
-                db.vaccines[vIndex].stock += qty;
-                const totalCost = qty * price;
-                addLog(`Pembelian: ${db.vaccines[vIndex].name} +${qty} @ ${formatRupiah(price)}. Total: ${formatRupiah(totalCost)}`);
-            }
-            saveDB(db);
-            bootstrap.Modal.getInstance(document.getElementById('modalPembelian')).hide();
-            renderPembelianTable();
-            showToast('Pembelian berhasil & Stok bertambah', 'success');
+            if(vIndex > -1) { db.vaccines[vIndex].stock += qty; addLog(`Pembelian: ${db.vaccines[vIndex].name} +${qty}`); }
+            saveDB(db); bootstrap.Modal.getInstance(document.getElementById('modalPembelian')).hide(); renderPembelianTable(); showToast('Pembelian berhasil', 'success');
         }
-
         function renderPembelianTable() {
             const db = loadDB();
             const tbody = document.getElementById('table-pembelian-body');
@@ -550,48 +763,59 @@
                 const vName = v ? v.name : 'Unknown';
                 const price = p.price || 0;
                 const subtotal = p.qty * price;
-                const tr = `<tr><td>${p.date}</td><td>${vName}</td><td class="text-success fw-bold">+${p.qty}</td><td class="text-end">${formatRupiah(price)}</td><td class="text-end fw-bold">${formatRupiah(subtotal)}</td><td><button class="btn btn-sm btn-danger" onclick="deletePurchase(${p.id}, ${p.vaccineId}, ${p.qty})"><i class="fas fa-trash"></i></button></td></tr>`;
+                const actionHtml = isPeternak() ? `<button class="btn btn-sm btn-light text-danger border" onclick="deletePurchase(${p.id}, ${p.vaccineId}, ${p.qty})"><i class="fas fa-trash"></i></button>` : '';
+                const tr = `<tr><td>${p.date}</td><td class="fw-bold text-dark">${vName}</td><td class="text-success fw-bold">+${p.qty}</td><td class="text-end">${formatRupiah(price)}</td><td class="text-end fw-bold">${formatRupiah(subtotal)}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
+        function deletePurchase(id, vid, qty) { if(!isPeternak()) return; if(!confirm('Batalkan pembelian ini?')) return; const db = loadDB(); db.purchases = db.purchases.filter(x => x.id != id); const vIndex = db.vaccines.findIndex(v => v.id == vid); if(vIndex > -1) { db.vaccines[vIndex].stock -= qty; addLog(`Hapus Pembelian: Stok ${db.vaccines[vIndex].name} berkurang ${qty}`); } saveDB(db); renderPembelianTable(); }
 
-        function deletePurchase(id, vid, qty) {
-            if(!confirm('Batalkan pembelian ini? Stok akan berkurang.')) return;
-            const db = loadDB();
-            db.purchases = db.purchases.filter(x => x.id != id);
-            const vIndex = db.vaccines.findIndex(v => v.id == vid);
-            if(vIndex > -1) { db.vaccines[vIndex].stock -= qty; addLog(`Hapus Pembelian: Stok ${db.vaccines[vIndex].name} berkurang ${qty}`); }
-            saveDB(db);
-            renderPembelianTable();
-        }
-
-        // --- 7. LOGIC: JADWAL ---
+        // --- 7. LOGIC: JADWAL (UPDATED) ---
         function prepareScheduleModal() {
+            if(!isPeternak()) return;
             document.getElementById('formJadwal').reset();
-            document.getElementById('jadwal-id').value = '';
             document.getElementById('jadwal-tanggal').valueAsDate = new Date();
             populateVaccineSelect('jadwal-vaksin');
             openModal('modalJadwal');
         }
-
         function saveJadwal() {
+            if(!isPeternak()) return;
             const vaccineId = document.getElementById('jadwal-vaksin').value;
             const qty = parseInt(document.getElementById('jadwal-jumlah').value);
             const date = document.getElementById('jadwal-tanggal').value;
             const notes = document.getElementById('jadwal-ket').value;
             if(!vaccineId || qty <= 0) { showToast('Data tidak valid', 'danger'); return; }
+            
             const db = loadDB();
             const vIndex = db.vaccines.findIndex(v => v.id == vaccineId);
-            if(db.vaccines[vIndex].stock < qty) { showToast('Stok tidak mencukupi untuk jadwal ini!', 'danger'); return; }
-            db.schedules.push({ id: Date.now(), date: date, vaccineId: parseInt(vaccineId), qty: qty, notes: notes });
-            db.vaccines[vIndex].stock -= qty;
-            addLog(`Jadwal: Pakai ${qty} ${db.vaccines[vIndex].name}. Sisa: ${db.vaccines[vIndex].stock}`);
-            saveDB(db);
-            bootstrap.Modal.getInstance(document.getElementById('modalJadwal')).hide();
-            renderJadwalTable();
-            showToast('Jadwal disimpan & Stok berkurang', 'success');
-        }
+            if(vIndex <= -1) return; 
 
+            // Simpan snapshot stok sebelum dikurangi
+            const stockBefore = db.vaccines[vIndex].stock;
+
+            if(stockBefore < qty) { showToast('Stok tidak mencukupi!', 'danger'); return; }
+            
+            // Kurangi stok
+            const stockAfter = stockBefore - qty;
+            db.vaccines[vIndex].stock = stockAfter;
+            
+            // Simpan jadwal dengan data stok awal dan akhir
+            db.schedules.push({ 
+                id: Date.now(), 
+                date: date, 
+                vaccineId: parseInt(vaccineId), 
+                qty: qty, 
+                notes: notes,
+                stockBefore: stockBefore, // Snapshot stok awal
+                stockAfter: stockAfter    // Snapshot stok akhir
+            });
+
+            addLog(`Jadwal: Pakai ${qty} ${db.vaccines[vIndex].name}`);
+            saveDB(db); 
+            bootstrap.Modal.getInstance(document.getElementById('modalJadwal')).hide(); 
+            renderJadwalTable(); 
+            showToast('Jadwal disimpan', 'success');
+        }
         function renderJadwalTable() {
             const db = loadDB();
             const tbody = document.getElementById('table-jadwal-body');
@@ -599,86 +823,130 @@
             db.schedules.forEach(s => {
                 const v = db.vaccines.find(x => x.id == s.vaccineId);
                 const vName = v ? v.name : 'Unknown';
-                const tr = `<tr><td>${s.date}</td><td>${vName}</td><td class="text-danger fw-bold">-${s.qty}</td><td>${s.notes}</td><td><button class="btn btn-sm btn-danger" onclick="deleteSchedule(${s.id}, ${s.vaccineId}, ${s.qty})"><i class="fas fa-trash"></i></button></td></tr>`;
+                const actionHtml = isPeternak() ? `<button class="btn btn-sm btn-light text-danger border" onclick="deleteSchedule(${s.id}, ${s.vaccineId}, ${s.qty})"><i class="fas fa-trash"></i></button>` : '';
+                
+                // Render sesuai kolom baru
+                const tr = `
+                    <tr>
+                        <td>${s.date}</td>
+                        <td class="fw-bold text-dark">${vName}</td>
+                        <td class="text-center text-muted">${s.stockBefore}</td>
+                        <td class="text-center text-danger fw-bold">-${s.qty}</td>
+                        <td class="text-center text-success fw-bold">${s.stockAfter}</td>
+                        <td>${s.notes}</td>
+                        <td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td>
+                    </tr>`;
                 tbody.innerHTML += tr;
             });
         }
-
-        function deleteSchedule(id, vid, qty) {
-            if(!confirm('Hapus jadwal ini? Stok akan dikembalikan.')) return;
-            const db = loadDB();
-            db.schedules = db.schedules.filter(x => x.id != id);
-            const vIndex = db.vaccines.findIndex(v => v.id == vid);
-            if(vIndex > -1) { db.vaccines[vIndex].stock += qty; addLog(`Hapus Jadwal: Stok ${db.vaccines[vIndex].name} kembali bertambah ${qty}`); }
-            saveDB(db);
-            renderJadwalTable();
+        function deleteSchedule(id, vid, qty) { 
+            if(!isPeternak()) return; 
+            if(!confirm('Hapus jadwal ini?')) return; 
+            const db = loadDB(); 
+            db.schedules = db.schedules.filter(x => x.id != id); 
+            const vIndex = db.vaccines.findIndex(v => v.id == vid); 
+            if(vIndex > -1) { 
+                db.vaccines[vIndex].stock += qty; 
+                addLog(`Hapus Jadwal: Stok ${db.vaccines[vIndex].name} kembali bertambah ${qty}`); 
+            } 
+            saveDB(db); 
+            renderJadwalTable(); 
         }
 
-        // --- 8. LOGIC: LAPORAN ---
+        // --- 8. LOGIC: PERINTAH (UPDATED STATUS) ---
+        function addCommand() {
+            if(!isPemilik()) return;
+            const text = document.getElementById('cmd-text').value;
+            if(!text) return;
+            const db = loadDB();
+            // Perubahan status default sesuai request
+            db.commands.push({ id: Date.now(), from: currentUser.name, date: new Date().toLocaleString('id-ID'), text: text, status: 'Belum Terlaksana' });
+            saveDB(db); document.getElementById('cmd-text').value = ''; renderCommandsPage(); showToast('Perintah terkirim!', 'success');
+        }
+        function renderCommandsPage() {
+            const db = loadDB();
+            const list = document.getElementById('command-list');
+            list.innerHTML = '';
+            const sortedCmds = [...db.commands].reverse();
+            sortedCmds.forEach(c => {
+                let btnHtml = '';
+                if(isPeternak()) btnHtml = `<button class="btn btn-sm btn-outline-success rounded-pill" onclick="markCommandDone(${c.id})"><i class="fas fa-check me-1"></i> Selesai</button>`;
+                if(isPemilik()) btnHtml = `<button class="btn btn-sm btn-outline-danger rounded-pill" onclick="deleteCommand(${c.id})"><i class="fas fa-trash me-1"></i> Hapus</button>`;
+                const statusClass = c.status === 'Selesai' ? 'text-success text-decoration-line-through' : 'text-danger fw-bold';
+                const item = `<li class="list-group-item border-0 mb-3 shadow-sm rounded command-card"><div class="d-flex justify-content-between align-items-center"><div class="flex-grow-1"><small class="text-muted d-block mb-1"><i class="far fa-clock me-1"></i> ${c.date}</small><div class="mb-1 fs-6">${c.text}</div><small class="${statusClass}">Status: ${c.status}</small></div><div class="ms-3">${btnHtml}</div></div></li>`;
+                list.innerHTML += item;
+            });
+            if(sortedCmds.length === 0) list.innerHTML = '<li class="list-group-item text-center text-muted border-0">Belum ada perintah.</li>';
+        }
+        function renderCommandsWidget() {
+            const db = loadDB();
+            const list = document.getElementById('dashboard-commands-list');
+            const widget = document.getElementById('dashboard-commands-widget');
+            // Tampilkan pesan yang statusnya belum selesai (Belum Terlaksana)
+            const activeCmds = db.commands.filter(c => c.status !== 'Selesai');
+            if(activeCmds.length > 0 && isPeternak()) {
+                widget.style.display = 'block';
+                list.innerHTML = '';
+                activeCmds.forEach(c => { list.innerHTML += `<div class="alert alert-light border-warning text-dark py-2 mb-2 small shadow-sm"><i class="fas fa-exclamation-circle text-warning me-2"></i> ${c.text}</div>`; });
+            } else { widget.style.display = 'none'; }
+        }
+        function markCommandDone(id) {
+            if(!isPeternak()) return;
+            const db = loadDB();
+            const c = db.commands.find(x => x.id == id);
+            if(c) { c.status = 'Selesai'; saveDB(db); renderCommandsPage(); renderCommandsWidget(); showToast('Perintah ditandai selesai', 'info'); }
+        }
+        function deleteCommand(id) {
+            if(!isPemilik()) return;
+            const db = loadDB(); db.commands = db.commands.filter(x => x.id != id); saveDB(db); renderCommandsPage();
+        }
+
+        // --- 9. LAPORAN (UPDATED) ---
         function renderLaporan() {
             const db = loadDB();
             document.getElementById('report-date-print').innerText = `Dicetak pada: ${new Date().toLocaleString('id-ID')}`;
-
-            const tVaksin = document.getElementById('report-vaksin-body');
-            tVaksin.innerHTML = '';
-            db.vaccines.forEach(v => {
-                const sName = db.suppliers.find(s => s.id == v.supplierId)?.name || 'Unknown';
-                tVaksin.innerHTML += `<tr><td>${v.name}</td><td>${sName}</td><td>${v.stock}</td></tr>`;
-            });
-
-            const tSupplier = document.getElementById('report-supplier-body');
-            tSupplier.innerHTML = '';
-            db.suppliers.forEach(s => {
-                tSupplier.innerHTML += `<tr><td>${s.name}</td><td>${s.contact}</td><td>${s.address}</td></tr>`;
-            });
-
-            const tJadwal = document.getElementById('report-jadwal-body');
-            tJadwal.innerHTML = '';
-            db.schedules.forEach(s => {
-                const vName = db.vaccines.find(v => v.id == s.vaccineId)?.name || 'Unknown';
-                tJadwal.innerHTML += `<tr><td>${s.date}</td><td>${vName}</td><td>${s.qty}</td><td>${s.notes}</td></tr>`;
-            });
-
-            const tPembelian = document.getElementById('report-pembelian-body');
-            tPembelian.innerHTML = '';
+            const tVaksin = document.getElementById('report-vaksin-body'); tVaksin.innerHTML = '';
+            db.vaccines.forEach(v => { tVaksin.innerHTML += `<tr><td>${v.name}</td><td>${v.stock}</td></tr>`; });
+            const tSupplier = document.getElementById('report-supplier-body'); tSupplier.innerHTML = '';
+            db.suppliers.forEach(s => { tSupplier.innerHTML += `<tr><td>${s.name}</td><td>${s.contact}</td><td>${s.address}</td></tr>`; });
+            const tPembelian = document.getElementById('report-pembelian-body'); tPembelian.innerHTML = '';
             let totalPembelian = 0;
             db.purchases.forEach(p => {
                 const vName = db.vaccines.find(v => v.id == p.vaccineId)?.name || 'Unknown';
-                const price = p.price || 0;
-                const subtotal = p.qty * price;
-                totalPembelian += subtotal;
+                const price = p.price || 0; const subtotal = p.qty * price; totalPembelian += subtotal;
                 tPembelian.innerHTML += `<tr><td>${p.date}</td><td>${vName}</td><td class="text-end">${p.qty}</td><td class="text-end">${formatRupiah(price)}</td><td class="text-end fw-bold">${formatRupiah(subtotal)}</td></tr>`;
             });
             document.getElementById('report-total-pembelian').innerText = formatRupiah(totalPembelian);
+            
+            // Update Laporan Jadwal dengan kolom baru
+            const tJadwal = document.getElementById('report-jadwal-body'); tJadwal.innerHTML = '';
+            if(db.schedules.length === 0) { 
+                tJadwal.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Belum ada data jadwal.</td></tr>`; // Colspan disesuaikan
+            } else { 
+                db.schedules.forEach(s => { 
+                    const vName = db.vaccines.find(v => v.id == s.vaccineId)?.name || 'Unknown'; 
+                    tJadwal.innerHTML += `
+                        <tr>
+                            <td>${s.date}</td>
+                            <td>${vName}</td>
+                            <td class="text-center">${s.stockBefore}</td>
+                            <td class="text-center text-danger fw-bold">-${s.qty}</td>
+                            <td class="text-center text-success fw-bold">${s.stockAfter}</td>
+                            <td>${s.notes}</td>
+                        </tr>`; 
+                }); 
+            }
         }
 
-        function renderActivityLog() {
-            const db = loadDB();
-            const list = document.getElementById('audit-log-list');
-            list.innerHTML = '';
-            db.logs.forEach(log => {
-                list.innerHTML += `<li class="list-group-item"><small>${log.timestamp}</small> <br> <strong>${log.user}</strong>: ${log.action}</li>`;
-            });
-        }
-
+        // --- 10. EXPORT PDF ---
         function exportPDF() {
+            renderLaporan(); window.scrollTo(0, 0); showToast('Sedang membuat PDF, harap tunggu...', 'info');
             const element = document.getElementById('printable-area');
-            const opt = {
-                margin:       10, filename: 'Laporan_Peternakan.pdf',
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true },
-                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' }
-            };
-            showToast('Sedang membuat PDF...', 'info');
-            html2pdf().set(opt).from(element).save().then(() => {
-                showToast('Laporan PDF berhasil diunduh', 'success');
-            }).catch(err => {
-                console.error(err);
-                showToast('Gagal membuat PDF', 'danger');
-            });
+            const opt = { margin: [10, 10, 10, 10], filename: 'Laporan_Peternakan.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2, useCORS: true, logging: false }, jsPDF: { unit: 'mm', format: 'a4', orientation: 'landscape' } };
+            html2pdf().set(opt).from(element).save().then(() => { showToast('Laporan PDF berhasil diunduh!', 'success'); }).catch((err) => { console.error(err); alert("Gagal membuat PDF."); });
         }
 
-        // --- 9. DASHBOARD & UTILS ---
+        // --- 11. DASHBOARD & UTILS ---
         function initDashboard() {
             const db = loadDB();
             document.getElementById('dash-total-vaksin').innerText = db.vaccines.length;
@@ -687,16 +955,15 @@
             document.getElementById('dash-low-stock').innerText = lowStock;
             const totalTrans = db.purchases.length + db.schedules.length;
             document.getElementById('dash-transaksi').innerText = totalTrans;
-
+            renderCommandsWidget();
             const ctx = document.getElementById('stockChart').getContext('2d');
             const labels = db.vaccines.map(v => v.name);
             const data = db.vaccines.map(v => v.stock);
-
             if(chartInstance) chartInstance.destroy();
             chartInstance = new Chart(ctx, {
                 type: 'bar',
-                data: { labels: labels, datasets: [{ label: 'Sisa Stok Vaksin', data: data, backgroundColor: data.map(v => v <= 2 ? 'rgba(220, 53, 69, 0.7)' : 'rgba(25, 135, 84, 0.7)'), borderColor: data.map(v => v <= 2 ? 'rgb(220, 53, 69)' : 'rgb(25, 135, 84)'), borderWidth: 1 }] },
-                options: { scales: { y: { beginAtZero: true } } }
+                data: { labels: labels, datasets: [{ label: 'Sisa Stok', data: data, backgroundColor: data.map(v => v <= 2 ? '#fca5a5' : '#6ee7b7'), borderRadius: 6, borderWidth: 0 }] },
+                options: { scales: { y: { beginAtZero: true, grid: { display: false } }, x: { grid: { display: false } } }, plugins: { legend: { display: false } } }
             });
         }
 
@@ -704,10 +971,13 @@
             const container = document.getElementById('toastContainer');
             const toastEl = document.createElement('div');
             toastEl.className = `toast align-items-center text-white bg-${type} border-0 show`;
-            toastEl.innerHTML = `<div class="d-flex"><div class="toast-body">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
+            toastEl.style.minWidth = "250px";
+            toastEl.innerHTML = `<div class="d-flex"><div class="toast-body fw-medium">${message}</div><button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button></div>`;
             container.appendChild(toastEl);
             setTimeout(() => toastEl.remove(), 3000);
         }
+
+        function openModal(id) { const modal = new bootstrap.Modal(document.getElementById(id)); modal.show(); }
     </script>
 </body>
 </html>

@@ -67,7 +67,7 @@ func main() {
     api.Delete("/schedules/:id", middleware.AuthRequired, controllers.DeleteSchedule)
 
     // 6. Menjalankan Server
-    log.Println("🚀 Server berjalan di http://localhost:3000")
+    log.Println("Server berjalan di http://localhost:3000")
     err := app.Listen(":3000")
     if err != nil {
         log.Fatal("Gagal menjalankan server:", err)

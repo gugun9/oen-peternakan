@@ -42,6 +42,6 @@ func InitDB() *gorm.DB {
         log.Fatal("Gagal koneksi ke Database:", err)
     }
 
-    log.Println("✅ Koneksi Database Berhasil!")
+    log.Println("Koneksi Database Berhasil!")
     return DB
 }
