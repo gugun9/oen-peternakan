@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Manajemen Vaksin Oen Peternakan</title>
+    <title>Sistem Manajemen Vaksin Oen Peternakan (Advanced)</title>
     
     <link rel="icon" href="logo oen.jpg" onerror="this.href='https://picsum.photos/seed/farm/32/32.jpg'">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -235,6 +235,33 @@
         .toast-container { position: fixed; top: 20px; right: 20px; z-index: 1060; }
         .toast { border-radius: 12px; border: none; box-shadow: var(--shadow-lg); }
 
+        /* Timeline Style for History Modal */
+        .timeline {
+            position: relative;
+            padding-left: 20px;
+            border-left: 2px solid #e2e8f0;
+            margin-left: 10px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 20px;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -26px;
+            top: 5px;
+            width: 10px;
+            height: 10px;
+            background: var(--primary-color);
+            border-radius: 50%;
+            border: 2px solid white;
+            box-shadow: 0 0 0 2px var(--primary-color);
+        }
+        .timeline-time { font-size: 0.8rem; color: var(--text-muted); font-weight: 600; }
+        .timeline-action { font-weight: 600; color: var(--text-dark); }
+        .timeline-detail { font-size: 0.85rem; color: var(--text-muted); }
+
         /* Responsive */
         @media (max-width: 992px) {
             .sidebar { transform: translateX(-100%); }
@@ -373,7 +400,7 @@
                         <h2 class="fw-bold">Manajemen Vaksin</h2>
                         <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="prepareVaksinModal()"><i class="fas fa-plus me-2"></i> Tambah Data</button>
                     </div>
-                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Vaksin</th><th>Supplier</th><th>Stok</th><th>Status</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-vaksin-body"></tbody></table></div></div></div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Vaksin</th><th>Supplier</th><th>Stok</th><th>Status</th><th>Riwayat</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-vaksin-body"></tbody></table></div></div></div>
                 </div>
 
                 <!-- 3. SUPPLIER -->
@@ -382,7 +409,7 @@
                         <h2 class="fw-bold">Daftar Supplier</h2>
                         <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="prepareSupplierModal()"><i class="fas fa-plus me-2"></i> Tambah Data</button>
                     </div>
-                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Supplier</th><th>Kontak</th><th>Alamat</th><th>Status Stok</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-supplier-body"></tbody></table></div></div></div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Nama Supplier</th><th>Kontak</th><th>Alamat</th><th>Status Stok</th><th>Riwayat</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-supplier-body"></tbody></table></div></div></div>
                 </div>
 
                 <!-- 4. PEMBELIAN VAKSIN -->
@@ -391,10 +418,10 @@
                         <h2 class="fw-bold">Pembelian Vaksin</h2>
                         <button class="btn btn-success rounded-pill shadow-sm role-btn-edit" onclick="preparePurchaseModal()"><i class="fas fa-plus me-2"></i> Beli Baru</button>
                     </div>
-                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Pembelian Vaksin Perbotol</th><th>Harga / Botol</th><th>Subtotal</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-pembelian-body"></tbody></table></div></div></div>
+                    <div class="card shadow-sm"><div class="card-body p-0"><div class="table-responsive"><table class="table table-hover align-middle mb-0"><thead class="bg-light"><tr><th>Tanggal</th><th>Vaksin</th><th>Jumlah Pembelian Vaksin Perbotol</th><th>Harga / Botol</th><th>Subtotal</th><th>Riwayat</th><th class="role-col-action">Aksi</th></tr></thead><tbody id="table-pembelian-body"></tbody></table></div></div></div>
                 </div>
 
-                <!-- 5. JADWAL VAKSIN (UPDATED) -->
+                <!-- 5. JADWAL VAKSIN -->
                 <div id="section-jadwal" class="section-view">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold">Jadwal Vaksinasi</h2>
@@ -409,6 +436,7 @@
                                 <th class="text-center">Jumlah Pakai</th>
                                 <th class="text-center">Sisa Stok</th>
                                 <th>Keterangan</th>
+                                <th>Riwayat</th>
                                 <th class="role-col-action">Aksi</th>
                             </tr>
                         </thead>
@@ -439,7 +467,7 @@
                     </div>
                 </div>
 
-                <!-- 7. LAPORAN (UPDATED) -->
+                <!-- 7. LAPORAN -->
                 <div id="section-laporan" class="section-view">
                     <div class="d-flex justify-content-between align-items-center mb-4">
                         <h2 class="fw-bold">Laporan & Ringkasan</h2>
@@ -472,7 +500,7 @@
                             <div class="card-body"><table class="table table-bordered table-striped"><thead><tr><th>Tanggal</th><th>Vaksin</th><th class="text-end">Jumlah</th><th class="text-end">Harga (Rp)</th><th class="text-end">Subtotal (Rp)</th></tr></thead><tbody id="report-pembelian-body"></tbody></table></div>
                         </div>
 
-                        <!-- Tabel Jadwal (Updated Headers) -->
+                        <!-- Tabel Jadwal -->
                         <div class="card shadow-sm mb-4">
                             <div class="card-header bg-light text-danger fw-bold">Tabel Jadwal Vaksinasi</div>
                             <div class="card-body">
@@ -512,6 +540,29 @@
     <!-- Modal Jadwal -->
     <div class="modal fade" id="modalJadwal" tabindex="-1"><div class="modal-dialog modal-dialog-centered"><div class="modal-content border-0 shadow-lg"><div class="modal-header border-bottom"><h5 class="modal-title fw-bold">Jadwal Vaksinasi</h5><button type="button" class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><form id="formJadwal"><input type="hidden" id="jadwal-id"><div class="mb-3"><label class="form-label small fw-bold">Tanggal</label><input type="date" id="jadwal-tanggal" class="form-control" required></div><div class="mb-3"><label class="form-label small fw-bold">Vaksin</label><select id="jadwal-vaksin" class="form-select" required></select></div><div class="mb-3"><label class="form-label small fw-bold">Jumlah Pakai</label><input type="number" id="jadwal-jumlah" class="form-control" min="1" required></div><div class="mb-3"><label class="form-label small fw-bold">Keterangan</label><input type="text" id="jadwal-ket" class="form-control"></div></form></div><div class="modal-footer border-top"><button type="button" class="btn btn-light text-muted rounded-pill" data-bs-dismiss="modal">Batal</button><button type="button" class="btn btn-primary rounded-pill" onclick="saveJadwal()">Simpan</button></div></div></div></div>
 
+    <!-- MODAL RIWAYAT -->
+    <div class="modal fade" id="modalHistory" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content border-0 shadow-lg">
+                <div class="modal-header bg-light border-bottom">
+                    <h5 class="modal-title fw-bold"><i class="fas fa-history me-2 text-primary"></i>Riwayat Perubahan Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-info py-2 small">
+                        <i class="fas fa-info-circle me-1"></i> Menampilkan log waktu Hari, Tanggal, Bulan, Tahun, Jam, Menit, dan Detik.
+                    </div>
+                    <div id="history-timeline" class="timeline">
+                        <!-- Timeline items inserted via JS -->
+                    </div>
+                </div>
+                <div class="modal-footer border-top">
+                    <button type="button" class="btn btn-secondary rounded-pill" data-bs-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- External Libraries Script -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -525,7 +576,7 @@
         });
 
         // --- 1. STATE MANAGEMENT ---
-        const DB_KEY = 'FarmDB_Secure_v3';
+        const DB_KEY = 'FarmDB_Secure_v4';
         let currentUser = null;
         let chartInstance = null;
 
@@ -538,13 +589,23 @@
 
         function saveDB(data) { localStorage.setItem(DB_KEY, JSON.stringify(data)); }
 
+        // Format Timestamp Lengkap: Hari, Tanggal, Bulan, Tahun, Jam, Menit, Detik
+        function getFullTimestamp() {
+            const now = new Date();
+            // Contoh Output: Senin, 25 Oktober 2026, 14:30:45 WIB
+            const optionsDate = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const dateStr = now.toLocaleDateString('id-ID', optionsDate);
+            const timeStr = now.toLocaleTimeString('id-ID', { hour12: false });
+            return `${dateStr}, ${timeStr} WIB`;
+        }
+
         function formatRupiah(number) {
             return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
         }
 
         function addLog(action) {
             const db = loadDB();
-            db.logs.unshift({ timestamp: new Date().toLocaleString('id-ID'), user: currentUser ? currentUser.username : 'System', action: action });
+            db.logs.unshift({ timestamp: getFullTimestamp(), user: currentUser ? currentUser.username : 'System', action: action });
             if(db.logs.length > 50) db.logs.pop();
             saveDB(db);
         }
@@ -630,6 +691,60 @@
             if(sectionId === 'perintah') renderCommandsPage(); 
         }
 
+        // --- UTILS: HISTORY MODAL (UPDATED) ---
+        function showHistory(id, type) {
+            const db = loadDB();
+            let item = null;
+            let itemName = "";
+            
+            if (type === 'vaksin') { item = db.vaccines.find(x => x.id == id); itemName = item ? item.name : 'Vaksin'; }
+            else if (type === 'supplier') { item = db.suppliers.find(x => x.id == id); itemName = item ? item.name : 'Supplier'; }
+            else if (type === 'pembelian') { 
+                item = db.purchases.find(x => x.id == id); 
+                // FIX: Cari nama vaksin berdasarkan vaccineId
+                if (item) {
+                    const v = db.vaccines.find(v => v.id == item.vaccineId);
+                    const vName = v ? v.name : 'Unknown Vaksin';
+                    itemName = `Pembelian: ${vName}`;
+                } else {
+                    itemName = 'Pembelian';
+                }
+            }
+            else if (type === 'jadwal') { 
+                item = db.schedules.find(x => x.id == id); 
+                // FIX: Cari nama vaksin berdasarkan vaccineId
+                if (item) {
+                    const v = db.vaccines.find(v => v.id == item.vaccineId);
+                    const vName = v ? v.name : 'Unknown Vaksin';
+                    itemName = `Jadwal: ${vName}`;
+                } else {
+                    itemName = 'Jadwal';
+                }
+            }
+
+            if (!item) { showToast('Data tidak ditemukan', 'danger'); return; }
+            
+            const timeline = document.getElementById('history-timeline');
+            timeline.innerHTML = `<h6 class="fw-bold mb-3">Riwayat: ${itemName}</h6>`;
+            
+            if (!item.history || item.history.length === 0) {
+                timeline.innerHTML += `<p class="text-muted fst-italic">Belum ada riwayat perubahan.</p>`;
+            } else {
+                // Tampilkan history terbaru di atas
+                [...item.history].reverse().forEach(h => {
+                    timeline.innerHTML += `
+                        <div class="timeline-item">
+                            <div class="timeline-time"><i class="far fa-clock me-1"></i> ${h.time}</div>
+                            <div class="timeline-action">${h.action}</div>
+                            <div class="timeline-detail">${h.details}</div>
+                        </div>
+                    `;
+                });
+            }
+            
+            openModal('modalHistory');
+        }
+
         // --- 4. LOGIC: VAKSIN ---
         function renderVaksinTable() {
             const db = loadDB();
@@ -640,9 +755,12 @@
                 const supplierName = supplier ? supplier.name : 'Unknown';
                 let statusBadge = `<span class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill">Aman</span>`;
                 if(v.stock <= 2) { statusBadge = `<span class="badge bg-danger bg-opacity-10 text-danger px-3 py-2 rounded-pill">Stok Menipis!</span>`; }
+                
+                const historyBtn = `<button class="btn btn-sm btn-info text-white" onclick="showHistory(${v.id}, 'vaksin')"><i class="fas fa-history"></i></button>`;
                 let actionHtml = isPeternak() ? 
                     `<button class="btn btn-sm btn-light text-warning border" onclick="editVaksin(${v.id})"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-light text-danger border" onclick="deleteVaksin(${v.id})"><i class="fas fa-trash"></i></button>` : `<span class="text-muted small">-</span>`;
-                const tr = `<tr><td class="fw-bold">${v.name}</td><td>${supplierName}</td><td>${v.stock}</td><td>${statusBadge}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
+                
+                const tr = `<tr><td class="fw-bold">${v.name}</td><td>${supplierName}</td><td>${v.stock}</td><td>${statusBadge}</td><td>${historyBtn}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
@@ -660,8 +778,23 @@
             const supplierId = document.getElementById('vaksin-supplier').value;
             const stock = parseInt(document.getElementById('vaksin-stok').value);
             const db = loadDB();
-            if(id) { const v = db.vaccines.find(x => x.id == id); v.name = name; v.supplierId = supplierId; v.stock = stock; addLog(`Edit Vaksin ${name}`); } 
-            else { db.vaccines.push({ id: Date.now(), name, supplierId, stock }); addLog(`Tambah Vaksin: ${name}`); }
+            
+            const historyEntry = {
+                time: getFullTimestamp(),
+                action: id ? 'Data Diupdate' : 'Data Baru Ditambahkan',
+                details: `Nama: ${name}, Supplier: ${supplierId}, Stok: ${stock}, User: ${currentUser.username}`
+            };
+
+            if(id) { 
+                const v = db.vaccines.find(x => x.id == id); 
+                v.name = name; v.supplierId = supplierId; v.stock = stock; 
+                if(!v.history) v.history = [];
+                v.history.push(historyEntry);
+                addLog(`Edit Vaksin ${name}`); 
+            } else { 
+                db.vaccines.push({ id: Date.now(), name, supplierId, stock, history: [historyEntry] }); 
+                addLog(`Tambah Vaksin: ${name}`); 
+            }
             saveDB(db);
             bootstrap.Modal.getInstance(document.getElementById('modalVaksin')).hide();
             renderVaksinTable();
@@ -693,9 +826,12 @@
                 const relatedVaccines = db.vaccines.filter(v => v.supplierId == s.id);
                 let stockStatus = '<span class="text-success"><i class="fas fa-check-circle me-1"></i>Stok Aman</span>';
                 relatedVaccines.forEach(v => { if(v.stock <= 2) stockStatus = '<span class="text-danger fw-bold"><i class="fas fa-exclamation-circle me-1"></i>ADA STOK < 2</span>'; });
+                
+                const historyBtn = `<button class="btn btn-sm btn-info text-white" onclick="showHistory(${s.id}, 'supplier')"><i class="fas fa-history"></i></button>`;
                 let actionHtml = isPeternak() ? 
                     `<button class="btn btn-sm btn-light text-warning border" onclick="editSupplier(${s.id})"><i class="fas fa-edit"></i></button> <button class="btn btn-sm btn-light text-danger border" onclick="deleteSupplier(${s.id})"><i class="fas fa-trash"></i></button>` : `<span class="text-muted small">-</span>`;
-                const tr = `<tr><td class="fw-bold">${s.name}</td><td>${s.contact}</td><td>${s.address}</td><td>${stockStatus}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
+                
+                const tr = `<tr><td class="fw-bold">${s.name}</td><td>${s.contact}</td><td>${s.address}</td><td>${stockStatus}</td><td>${historyBtn}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
@@ -712,8 +848,23 @@
             const contact = document.getElementById('supplier-kontak').value;
             const address = document.getElementById('supplier-alamat').value;
             const db = loadDB();
-            if(id) { const s = db.suppliers.find(x => x.id == id); if(s) { s.name = name; s.contact = contact; s.address = address; addLog(`Edit Supplier: ${name}`); } } 
-            else { db.suppliers.push({ id: Date.now(), name, contact, address }); addLog(`Tambah Supplier: ${name}`); }
+            
+            const historyEntry = {
+                time: getFullTimestamp(),
+                action: id ? 'Data Diupdate' : 'Data Baru Ditambahkan',
+                details: `Nama: ${name}, Kontak: ${contact}, User: ${currentUser.username}`
+            };
+
+            if(id) { 
+                const s = db.suppliers.find(x => x.id == id); 
+                if(s) { s.name = name; s.contact = contact; s.address = address; 
+                if(!s.history) s.history = [];
+                s.history.push(historyEntry);
+                addLog(`Edit Supplier: ${name}`); } 
+            } else { 
+                db.suppliers.push({ id: Date.now(), name, contact, address, history: [historyEntry] }); 
+                addLog(`Tambah Supplier: ${name}`); 
+            }
             saveDB(db); bootstrap.Modal.getInstance(document.getElementById('modalSupplier')).hide(); renderSupplierTable(); showToast('Data Supplier tersimpan', 'success');
         }
         function editSupplier(id) { if(!isPeternak()) return; const db = loadDB(); const s = db.suppliers.find(x => x.id == id);
@@ -748,10 +899,18 @@
             const price = parseFloat(document.getElementById('pembelian-harga').value) || 0;
             const date = document.getElementById('pembelian-tanggal').value;
             if(!vaccineId || qty <= 0) { showToast('Data tidak valid', 'danger'); return; }
+            
             const db = loadDB();
-            db.purchases.push({ id: Date.now(), date: date, vaccineId: parseInt(vaccineId), qty: qty, price: price });
             const vIndex = db.vaccines.findIndex(v => v.id == vaccineId);
             if(vIndex > -1) { db.vaccines[vIndex].stock += qty; addLog(`Pembelian: ${db.vaccines[vIndex].name} +${qty}`); }
+            
+            const historyEntry = {
+                time: getFullTimestamp(),
+                action: 'Pembelian Vaksin',
+                details: `Beli ${qty} botol, Total: ${formatRupiah(qty*price)}, User: ${currentUser.username}`
+            };
+
+            db.purchases.push({ id: Date.now(), date: date, vaccineId: parseInt(vaccineId), qty: qty, price: price, history: [historyEntry] });
             saveDB(db); bootstrap.Modal.getInstance(document.getElementById('modalPembelian')).hide(); renderPembelianTable(); showToast('Pembelian berhasil', 'success');
         }
         function renderPembelianTable() {
@@ -763,14 +922,15 @@
                 const vName = v ? v.name : 'Unknown';
                 const price = p.price || 0;
                 const subtotal = p.qty * price;
+                const historyBtn = `<button class="btn btn-sm btn-info text-white" onclick="showHistory(${p.id}, 'pembelian')"><i class="fas fa-history"></i></button>`;
                 const actionHtml = isPeternak() ? `<button class="btn btn-sm btn-light text-danger border" onclick="deletePurchase(${p.id}, ${p.vaccineId}, ${p.qty})"><i class="fas fa-trash"></i></button>` : '';
-                const tr = `<tr><td>${p.date}</td><td class="fw-bold text-dark">${vName}</td><td class="text-success fw-bold">+${p.qty}</td><td class="text-end">${formatRupiah(price)}</td><td class="text-end fw-bold">${formatRupiah(subtotal)}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
+                const tr = `<tr><td>${p.date}</td><td class="fw-bold text-dark">${vName}</td><td class="text-success fw-bold">+${p.qty}</td><td class="text-end">${formatRupiah(price)}</td><td class="text-end fw-bold">${formatRupiah(subtotal)}</td><td>${historyBtn}</td><td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td></tr>`;
                 tbody.innerHTML += tr;
             });
         }
         function deletePurchase(id, vid, qty) { if(!isPeternak()) return; if(!confirm('Batalkan pembelian ini?')) return; const db = loadDB(); db.purchases = db.purchases.filter(x => x.id != id); const vIndex = db.vaccines.findIndex(v => v.id == vid); if(vIndex > -1) { db.vaccines[vIndex].stock -= qty; addLog(`Hapus Pembelian: Stok ${db.vaccines[vIndex].name} berkurang ${qty}`); } saveDB(db); renderPembelianTable(); }
 
-        // --- 7. LOGIC: JADWAL (UPDATED) ---
+        // --- 7. LOGIC: JADWAL ---
         function prepareScheduleModal() {
             if(!isPeternak()) return;
             document.getElementById('formJadwal').reset();
@@ -790,24 +950,27 @@
             const vIndex = db.vaccines.findIndex(v => v.id == vaccineId);
             if(vIndex <= -1) return; 
 
-            // Simpan snapshot stok sebelum dikurangi
             const stockBefore = db.vaccines[vIndex].stock;
-
             if(stockBefore < qty) { showToast('Stok tidak mencukupi!', 'danger'); return; }
             
-            // Kurangi stok
             const stockAfter = stockBefore - qty;
             db.vaccines[vIndex].stock = stockAfter;
             
-            // Simpan jadwal dengan data stok awal dan akhir
+            const historyEntry = {
+                time: getFullTimestamp(),
+                action: 'Jadwal Vaksinasi Dibuat',
+                details: `Pakai ${qty} botol, Stok Akhir: ${stockAfter}, Ket: ${notes}, User: ${currentUser.username}`
+            };
+
             db.schedules.push({ 
                 id: Date.now(), 
                 date: date, 
                 vaccineId: parseInt(vaccineId), 
                 qty: qty, 
                 notes: notes,
-                stockBefore: stockBefore, // Snapshot stok awal
-                stockAfter: stockAfter    // Snapshot stok akhir
+                stockBefore: stockBefore,
+                stockAfter: stockAfter,
+                history: [historyEntry]
             });
 
             addLog(`Jadwal: Pakai ${qty} ${db.vaccines[vIndex].name}`);
@@ -823,9 +986,9 @@
             db.schedules.forEach(s => {
                 const v = db.vaccines.find(x => x.id == s.vaccineId);
                 const vName = v ? v.name : 'Unknown';
+                const historyBtn = `<button class="btn btn-sm btn-info text-white" onclick="showHistory(${s.id}, 'jadwal')"><i class="fas fa-history"></i></button>`;
                 const actionHtml = isPeternak() ? `<button class="btn btn-sm btn-light text-danger border" onclick="deleteSchedule(${s.id}, ${s.vaccineId}, ${s.qty})"><i class="fas fa-trash"></i></button>` : '';
                 
-                // Render sesuai kolom baru
                 const tr = `
                     <tr>
                         <td>${s.date}</td>
@@ -834,6 +997,7 @@
                         <td class="text-center text-danger fw-bold">-${s.qty}</td>
                         <td class="text-center text-success fw-bold">${s.stockAfter}</td>
                         <td>${s.notes}</td>
+                        <td>${historyBtn}</td>
                         <td class="role-col-action" style="display: ${isPeternak()?'table-cell':'none'}">${actionHtml}</td>
                     </tr>`;
                 tbody.innerHTML += tr;
@@ -859,8 +1023,7 @@
             const text = document.getElementById('cmd-text').value;
             if(!text) return;
             const db = loadDB();
-            // Perubahan status default sesuai request
-            db.commands.push({ id: Date.now(), from: currentUser.name, date: new Date().toLocaleString('id-ID'), text: text, status: 'Belum Terlaksana' });
+            db.commands.push({ id: Date.now(), from: currentUser.name, date: getFullTimestamp(), text: text, status: 'Belum Terlaksana' });
             saveDB(db); document.getElementById('cmd-text').value = ''; renderCommandsPage(); showToast('Perintah terkirim!', 'success');
         }
         function renderCommandsPage() {
@@ -882,7 +1045,6 @@
             const db = loadDB();
             const list = document.getElementById('dashboard-commands-list');
             const widget = document.getElementById('dashboard-commands-widget');
-            // Tampilkan pesan yang statusnya belum selesai (Belum Terlaksana)
             const activeCmds = db.commands.filter(c => c.status !== 'Selesai');
             if(activeCmds.length > 0 && isPeternak()) {
                 widget.style.display = 'block';
@@ -904,7 +1066,7 @@
         // --- 9. LAPORAN (UPDATED) ---
         function renderLaporan() {
             const db = loadDB();
-            document.getElementById('report-date-print').innerText = `Dicetak pada: ${new Date().toLocaleString('id-ID')}`;
+            document.getElementById('report-date-print').innerText = `Dicetak pada: ${getFullTimestamp()}`;
             const tVaksin = document.getElementById('report-vaksin-body'); tVaksin.innerHTML = '';
             db.vaccines.forEach(v => { tVaksin.innerHTML += `<tr><td>${v.name}</td><td>${v.stock}</td></tr>`; });
             const tSupplier = document.getElementById('report-supplier-body'); tSupplier.innerHTML = '';
@@ -918,10 +1080,9 @@
             });
             document.getElementById('report-total-pembelian').innerText = formatRupiah(totalPembelian);
             
-            // Update Laporan Jadwal dengan kolom baru
             const tJadwal = document.getElementById('report-jadwal-body'); tJadwal.innerHTML = '';
             if(db.schedules.length === 0) { 
-                tJadwal.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Belum ada data jadwal.</td></tr>`; // Colspan disesuaikan
+                tJadwal.innerHTML = `<tr><td colspan="6" class="text-center text-muted">Belum ada data jadwal.</td></tr>`; 
             } else { 
                 db.schedules.forEach(s => { 
                     const vName = db.vaccines.find(v => v.id == s.vaccineId)?.name || 'Unknown'; 
